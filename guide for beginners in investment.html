@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>초심자를 위한 S&P500 ETF 얼렁뚱땅 가이드</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root {
+    --accent: #4a7efc;
+    --bg: #f5f5f5;
+    --card-bg: #ffffff;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    margin: 0;
+    padding: 16px 12px 32px;
+    color: #333;
+    line-height: 1.5;
+  }
+
+  .box {
+    max-width: 540px;
+    margin: 0 auto 16px;
+    background: var(--card-bg);
+    padding: 20px 18px;
+    border-radius: 16px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  }
+
+  h1, h2 {
+    font-weight: 600;
+    margin-top: 0;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 20px;
+    margin-bottom: 4px;
+  }
+
+  p.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+    margin-top: 0;
+    margin-bottom: 4px;
+  }
+
+  .section {
+    margin-top: 14px;
+  }
+
+  .toggle {
+    cursor: pointer;
+    background: #eef1ff;
+    padding: 12px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .toggle span.chevron {
+    font-size: 12px;
+    color: #555;
+  }
+
+.sub-toggle {
+  cursor: pointer;
+  background: #f4f6ff;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-left: 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+}
+.sub-toggle .chevron {
+  font-size: 11px;
+}
+.sub-content {
+  display: none;
+  padding: 10px 12px;
+  background: #fcfcff;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  margin-left: 12px;
+  margin-bottom: 6px;
+  font-size: 13px;
+}
+
+.bonus-toggle {
+  background: #eef1ff;
+  opacity: 0.85;
+  font-size: 13px;
+}
+.bonus-content {
+  font-size: 13px;
+}
+
+  .content {
+    display: none;
+    padding: 10px 12px 12px;
+    background: #fafafa;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-bottom: 6px;
+    font-size: 14px;
+  }
+
+  ul, ol {
+    padding-left: 18px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+  }
+
+  li {
+    margin-bottom: 4px;
+  }
+
+  button.full {
+    background: var(--accent);
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 999px;
+    width: 100%;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 12px;
+    font-weight: 600;
+  }
+
+  button.full:active {
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+
+  .info-box {
+    background: #fafafa;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    margin-top: 10px;
+    font-size: 13px;
+  }
+
+  /* ETF 비교 "차트" 스타일 */
+  .etf-chart {
+    margin-top: 8px;
+  }
+
+  .etf-row {
+    margin-bottom: 6px;
+  }
+
+  .etf-label {
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+
+  .etf-bar-bg {
+    width: 100%;
+    height: 12px;
+    border-radius: 999px;
+    background: #e5e7eb;
+    overflow: hidden;
+  }
+
+  .etf-bar {
+    height: 100%;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .etf-mini {
+    font-size: 12px;
+    color: #666;
+    margin-top: 2px;
+  }
+
+  /* 시뮬레이터 */
+  .sim-header {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  .amount-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+
+  .amount-btn {
+    flex: 1 1 calc(50% - 6px);
+    border-radius: 999px;
+    border: 1px solid #dde1ff;
+    padding: 8px 0;
+    font-size: 13px;
+    text-align: center;
+    cursor: pointer;
+    background: #f7f8ff;
+  }
+
+  .amount-btn.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+  }
+
+  .sim-result {
+    margin-top: 6px;
+    font-size: 13px;
+  }
+
+  .sim-result p {
+    margin: 2px 0;
+  }
+
+  .sim-highlight {
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .sim-assumption {
+    font-size: 11px;
+    color: #777;
+    margin-top: 6px;
+  }
+
+  /* 랜덤 투자 정보 */
+  #randomInfo {
+    font-size: 13px;
+  }
+
+  /* 작은 화면에서 여백 조정 */
+  @media (min-width: 640px) {
+    body {
+      padding-top: 24px;
+    }
+    .box {
+      padding: 22px 22px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="box">
+  <h1>📘 S&P500 ETF 얼렁뚱땅 가이드</h1>
+  <p class="subtitle" style="color:#d00000;">
+  <strong>※ 투자의 모든 책임은 본인에게 있습니다</strong>
+</p>
+
+  <!-- 왜 1000원부터? -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c2')">
+      <span>💡 왜 1,000원부터 시작하라고 할까?</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c2">
+      <ul>
+        <li>“돈 많아야 투자한다”는 생각을 깨는 게 첫 단계</li>
+        <li>소액이면 등락에 덜 흔들려서 <strong>멘탈 연습</strong>에 좋음</li>
+        <li>금액보다 <strong>“시장에 나와 있는 경험”</strong>이 훨씬 중요함</li>
+        <li>작게라도 꾸준히 사다 보면, 자연스럽게 공부하게 됨</li>
+      </ul>
+    </div>
+  </div>
+
+<!-- 복리 개념 -->
+<div class="section">
+  <div class="sub-toggle" onclick="toggleContent('comp')">
+    <span>📚 복리란 무엇인가?</span><span class="chevron">▼</span>
+  </div>
+  <div class="content" id="comp">
+    <p>
+      복리는 <strong>“이자 위에 또 이자가 붙는 구조”</strong>야.<br>
+      시간 + 꾸준함 = 눈덩이처럼 커지는 힘.
+    </p>
+    <ul>
+      <li>원금 → 이익 발생</li>
+      <li>다음 투자에서 “원금 + 이익” 전체가 다시 불어남</li>
+      <li>시간이 길수록 기하급수적으로 커지는 효과</li>
+    </ul>
+    <p style="font-size:12px;color:#555;">※ ETF 적립식 투자는 복리를 자연스럽게 활용하는 방식</p>
+  </div>
+</div>
+
+  <!-- ETF란? -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c1')">
+      <span>📌 ETF란 무엇인가?</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c1">
+      <p>ETF는 “여러 주식을 한 바구니처럼 묶어놓은 상품”입니다.</p>
+      <ul>
+        <li>SPY / VOO / IVV = 미국 대표 지수 <strong>S&P500</strong>을 따라가는 ETF</li>
+        <li>즉, 미국 상위 500개 기업 전체에 나눠서 투자하는 효과</li>
+        <li>개별 기업 리스크 ↓ / 분산 투자 효과 ↑</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- S&P500 특징 -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c3')">
+      <span>📈 S&P500 ETF의 핵심 특징</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c3">
+      <ul>
+        <li>미국 상위 500개 기업의 평균 성장성을 따라감</li>
+        <li>장기적으로는 우상향해온 지수</li>
+        <li>개별 종목보다 덜 드라마틱해서 멘탈 관리에 유리</li>
+        <li>“적립식 장기 투자”와 궁합이 가장 좋음</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ETF 비교 "차트" -->
+  <div class="section">
+    <div class="sub-toggle" onclick="toggleContent('c8')">
+      <span>📊 대표 S&P500 ETF 간단 비교</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c8">
+      <p style="font-size:13px;">아주 거칠게 본 <strong>“규모/인기 느낌”</strong> 정도의 개념도야. 실제 수치는 계속 변함.</p>
+      <div class="etf-chart">
+        <div class="etf-row">
+          <div class="etf-label">VOO (Vanguard)</div>
+          <div class="etf-bar-bg">
+            <div class="etf-bar" style="width: 100%;"></div>
+          </div>
+          <div class="etf-mini">저비용(0.03%) + 장기투자용으로 많이 쓰임</div>
+        </div>
+        <div class="etf-row">
+          <div class="etf-label">SPY (State Street)</div>
+          <div class="etf-bar-bg">
+            <div class="etf-bar" style="width: 93%; opacity:0.9;"></div>
+          </div>
+          <div class="etf-mini">거래량, 유동성이 가장 높은 편</div>
+        </div>
+        <div class="etf-row">
+          <div class="etf-label">IVV (iShares)</div>
+          <div class="etf-bar-bg">
+            <div class="etf-bar" style="width: 88%; opacity:0.8;"></div>
+          </div>
+          <div class="etf-mini">규모 크고 안정적인 또 다른 S&P500 ETF</div>
+        </div>
+      </div>
+      <p style="font-size:12px; color:#777; margin-top:8px;">
+        📎 세 ETF 모두 “S&P500을 거의 똑같이 따라가는 상품”이라,  
+        <strong>장기 분산투자</strong> 관점에서는 크게 다르지 않다고 보는 편이야.
+      </p>
+    </div>
+  </div>
+<!-- 배당 설명 -->
+<div class="section">
+  <div class="toggle" onclick="toggleContent('dividend1')">
+    <span>💰 배당이란 무엇인가?</span><span class="chevron">▼</span>
+  </div>
+  <div class="content" id="dividend1">
+    <p>
+      <strong>배당(dividend)</strong>은 기업이 벌어들인 이익 중 일부를  
+      주주에게 “현금 형태로 나눠주는 것”이야.
+    </p>
+    <ul>
+      <li>기업의 실적이 좋아서 “여유 이익”이 생기면 지급</li>
+      <li>ETF도 포함된 기업들의 배당을 모아 “ETF 배당”으로 지급</li>
+      <li>미국 ETF의 배당은 보통 <strong>분기별(3개월마다)</strong> 지급</li>
+    </ul>
+    <p style="font-size:13px; color:#666;">
+      즉, ETF를 갖고 있으면 “가격 상승 수익 + 배당 수익”을 동시에 얻는 구조야.
+    </p>
+  </div>
+</div>
+
+<!-- 하위: S&P500 ETF 배당 정보 -->
+<div class="sub-toggle" onclick="toggleContent('dividend2')">
+  <span>📎 S&P500 ETF의 배당 수익률</span><span class="chevron">▼</span>
+</div>
+<div class="sub-content" id="dividend2">
+  <p>S&P500 ETF(VOO·SPY·IVV 등)의 배당 수익률은 대략:</p>
+  <ul>
+    <li>📌 <strong>약 1%</strong> 수준 (시기 따라 변동)</li>
+    <li>시장 상황·금리·기업 실적에 따라 매년 크게 달라짐</li>
+    <li>분기마다 받는 배당이 자동으로 계좌에 들어옴</li>
+  </ul>
+
+  <p style="font-size:12px;color:#777;">
+    ※ 정확한 배당률은 매월/매년 변하므로 “대략적인 투자 개념”으로 보는 게 좋아.
+  </p>
+</div>
+
+  <!-- 토스증권 주식 모으기 -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c4')">
+      <span>📱 토스증권에서 '주식 모으기'로 시작하기</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c4">
+      <ol>
+        <li>토스 앱 → 아래쪽 탭에서 <strong>“증권”</strong> 선택</li>
+        <li>검색창에 <strong>VOO / SPY / IVV 등</strong> 입력</li>
+        <li>해당 종목 화면에서 <strong>“주식 모으기”</strong> 버튼 선택</li>
+        <li><strong>1,000원 / 3,000원 / 5,000원 / 10,000원</strong> 등 금액 설정</li>
+        <li>주기(매일/매주/매월)와 날짜 지정 → 자동 투자 시작</li>
+      </ol>
+      <p style="font-size:12px; color:#777;">※ 실제 메뉴 위치/문구는 토스 업데이트에 따라 조금씩 달라질 수 있어.</p>
+    </div>
+  </div>
+
+<!-- ⬇ 하위 섹션: 데이마켓 -->
+<div class="sub-toggle" onclick="toggleContent('sub_day')">
+  <span>💵 데이마켓에서 직접 매수·매도하기</span><span class="chevron">▼</span>
+</div>
+<div class="sub-content" id="sub_day">
+  <p><strong>매수:</strong></p>
+  <ol>
+    <li>토스증권 → VOO / SPY 등 검색</li>
+    <li>‘구매하기’ 선택 → 금액 입력 → 확인</li>
+  </ol>
+  <p><strong>매도:</strong></p>
+  <ol>
+    <li>보유목록 → 종목 선택</li>
+    <li>‘판매하기’ 선택 → 일부/전체 선택</li>
+  </ol>
+</div>
+
+<!-- ⬇ 하위 섹션: 시장 시간 -->
+<div class="sub-toggle" onclick="toggleContent('sub_time')">
+  <span>⏰ 미국 주식 시장 시간 (한국 기준)</span><span class="chevron">▼</span>
+</div>
+<div class="sub-content" id="sub_time">
+  <ul>
+    <li>정규장: 밤 10:30 ~ 새벽 5:00</li>
+    <li>프리장: 밤 6:00 ~ 10:30</li>
+    <li>애프터: 새벽 5:00 ~ 9:00</li>
+  </ul>
+  <p style="font-size:12px;color:#777;">정확한 시간은 매년 서머타임에 따라 달라짐.</p>
+</div>
+
+<!-- 상위: 환율 설명 -->
+<div class="section">
+  <div class="toggle" onclick="toggleContent('fx1')">
+    <span>💱 환율이 왜 중요한가?</span><span class="chevron">▼</span>
+  </div>
+  <div class="content" id="fx1">
+    <p>미국 주식 = 달러로 거래 → 환율이 직접적 영향.</p>
+    <ul>
+      <li>환율 낮을 때 매수 → 유리함</li>
+      <li>환율 상승 → 평가액 오르기도 함(달러 강세)</li>
+      <li>환율 하락 → 평가액 낮아질 수 있음(달러 약세)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 하위 1: 환전 방법 -->
+<div class="sub-toggle" onclick="toggleContent('fx_sub1')">
+  <span>🏦 토스증권에서 환전하는 법</span><span class="chevron">▼</span>
+</div>
+<div class="sub-content" id="fx_sub1">
+  <ol>
+    <li>토스 → 증권 → 미국주식</li>
+    <li>상단 달러 잔고 클릭</li>
+    <li>“환전하기” 선택 후 금액 입력</li>
+  </ol>
+</div>
+
+<!-- 하위 2: 우대 시간 -->
+<div class="sub-toggle" onclick="toggleContent('fx_sub2')">
+  <span>⏰ 환전 수수료 우대 시간</span><span class="chevron">▼</span>
+</div>
+<div class="sub-content" id="fx_sub2">
+  <ul>
+    <li>환전 우대 시간은 증권사마다 다르니 <strong>본인 증권사 확인 필수</strong></li>
+    <li>대체로 오전 9~15시 사이 우대</li>
+  </ul>
+</div>
+
+<div class="section">
+  <div class="toggle" onclick="toggleContent('tax1')">
+    <span>🧾 미국 주식 세금 간단 정리</span><span class="chevron">▼</span>
+  </div>
+  <div class="content" id="tax1">
+    <p>미국 주식은 <strong>배당세</strong>와 <strong>양도소득세</strong>가 적용돼.</p>
+
+    <p><strong>1) 미국 배당소득세</strong></p>
+    <ul>
+      <li>미국에서 원천징수 <strong>15%</strong></li>
+      <li>금융소득 2천만원 이하인 경우, 한국에서 추가 과세 없음</li>
+      <li>예: 100달러 배당 → 85달러 입금</li>
+    </ul>
+
+    <p><strong>2) 양도소득세(팔아서 번 돈)</strong></p>
+    <ul>
+      <li>1년 전체 해외주식 수익(실현 수익) 합산 (손실도 합산)</li>
+      <li><strong>250만원까지는 비과세</strong></li>
+      <li>250만원 초과분 → <strong>22%</strong> (지방세 포함)</li>
+      <li>예: A에서 400만원 수익, B에서 100만원 손실 → (400-100-250)=50만원만 22% 과세</li>
+      <li>환차익(달러 환전 수익)도 포함됨</li>
+      <li>다음 해 5월에 직접 신고·납부해야 함 (자동 아님)</li>
+      <li>💡 팁: 연말에 손실 종목 정리하면 과세 낮출 수 있음</li>
+    </ul>
+
+    <p style="font-size:12px;color:#777;">
+      ※ ETF의 분배금도 배당과 동일하게 15% 자동 원천징수.
+    </p>
+  </div>
+</div>
+
+  <!-- M7 vs S&P500 -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c9')">
+      <span>➕ M7과 S&P500 ETF</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c9">
+      <p><strong>M7(Magnificent 7)이라고 불리는 빅테크 7개 기업:</strong></p>
+      <ul>
+        <li>애플 (Apple)</li>
+        <li>마이크로소프트 (Microsoft)</li>
+        <li>알파벳 (구글, Alphabet)</li>
+        <li>아마존 (Amazon)</li>
+        <li>메타 (Meta)</li>
+        <li>엔비디아 (NVIDIA)</li>
+        <li>테슬라 (Tesla)</li>
+      </ul>
+      <p>
+        이 기업들이 S&P500 안에서 <strong>시가총액 비중을 크게 차지</strong>하고 있어서,  
+        S&P500 ETF를 사면 결과적으로 M7에도 어느 정도 비중을 두는 효과가 있어.
+      </p>
+      <p style="margin-top:8px;">
+        하지만 M7만 직접 사는 것보다,  
+        <strong>S&P500 ETF에 투자하는 게 더 안전하고 합리적</strong>인 이유:
+      </p>
+      <ul>
+        <li>M7 외의 수백 개 기업에 동시에 분산 투자 → <strong>집중 리스크 완화</strong></li>
+        <li>어느 한 기업이 망쳐도, 나머지 기업들이 평균을 지탱</li>
+        <li>“종목 선택 실수” 대신 “시장 전체”를 사는 전략</li>
+        <li>장기 투자에서는 <strong>“생존”과 “버티기”가 제일 중요</strong>한데,  
+            S&P500 ETF는 이 점에서 훨씬 유리함</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 주의사항 -->
+  <div class="section">
+    <div class="toggle" onclick="toggleContent('c7')">
+      <span>⚠️ 주의사항</span><span class="chevron">▼</span>
+    </div>
+    <div class="content" id="c7">
+      <ul>
+        <li>단기 수익을 노리기보다는 10년 이상을 보는 게 더 현실적</li>
+        <li>시장은 항상 오르락내리락한다. 하락이 이상한 게 아님</li>
+        <li>ETF도 “손실 가능성”이 있는 투자 상품이라는 점은 변함 없음</li>
+      </ul>
+      <p style="font-weight:bold; color:#d33; font-size:13px; margin-top:6px;">
+        📌 모든 투자는 결국 <strong>자신의 책임</strong>입니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- 시뮬레이터 -->
+  <div class="section">
+<h2 style="font-size:16px; margin-bottom:6px;">🧮 S&P500 ETF 10년 적립식 투자 시뮬레이터</h2>
+<p class="sim-header">
+  미국 시장은 주말/공휴일에 열리지 않기 때문에  
+  1년 기준 약 <strong>250일</strong>만 거래 가능해.<br>
+  이 계산기는 “매 거래일마다 일정 금액”을 투자한다고 가정해!
+</p>
+    <div class="amount-buttons">
+      <div class="amount-btn" onclick="selectAmount(1000)">일 1,000원</div>
+      <div class="amount-btn" onclick="selectAmount(3000)">일 3,000원</div>
+      <div class="amount-btn" onclick="selectAmount(5000)">일 5,000원</div>
+      <div class="amount-btn" onclick="selectAmount(10000)">일 10,000원</div>
+    </div>
+    <button class="full" onclick="runSimulation()">10년 뒤 금액 계산하기</button>
+    <div class="info-box sim-result" id="simResult">
+      금액을 선택한 뒤, 계산하기 버튼을 눌러줘.
+    </div>
+    <p class="sim-assumption">
+      * 실제 수익률은 해마다 크게 달라질 수 있고,  
+      이 시뮬레이터는 <strong>아주 단순한 예시</strong>일 뿐이야.  
+      “이 정도 느낌”만 참고용으로 보면 좋음.
+    </p>
+  </div>
+
+  <!-- 랜덤 투자 정보 -->
+  <button class="full" onclick="showRandomETF()">🎲 랜덤 투자 정보 보기</button>
+  <div id="randomInfo" class="info-box" style="margin-top:8px;"></div>
+</div>
+
+<script>
+  function toggleContent(id) {
+    const c = document.getElementById(id);
+    const box = c.previousElementSibling; // toggle div
+    const chev = box.querySelector(".chevron");
+    if (c.style.display === "block") {
+      c.style.display = "none";
+      if (chev) chev.textContent = "▼";
+    } else {
+      c.style.display = "block";
+      if (chev) chev.textContent = "▲";
+    }
+  }
+
+  // 랜덤 투자 정보
+  const etfFacts = [
+    "VOO는 비용 비율이 매우 낮은 S&P500 ETF로, 장기투자용으로 많이 사용됩니다.",
+    "S&P500 지수는 미국 전체 시가총액의 상당 부분을 반영하는 대표 지수입니다.",
+    "ETF를 활용하면, 개별 종목보다 감정 기복을 줄이고 시장 평균에 가깝게 갈 수 있습니다.",
+    "계란을 한 바구니에 담지 말라 - 분산투자가 리스크를 줄이는 가장 기본적인 방법!",
+    "복리의 마법 - 10%씩 30년 투자하면 원금이 17배가 됩니다. 일찍 시작할수록 유리합니다.",
+    "잃지 않는 것이 먼저 - 50% 손실을 회복하려면 100% 수익이 필요합니다.",
+    "시장 타이밍은 불가능 - 최고점과 최저점을 맞추려 하지 말고 꾸준히 투자하세요.",
+    "수수료도 수익률 - 연 1%의 수수료 차이가 30년 후엔 25% 이상 수익 차이를 만듭니다.",
+    "감정은 최대의 적 - 공포에 팔고 탐욕에 사면 손해를 봅니다.",
+    "이해하지 못하는 것에 투자하지 마라 - 유행이나 남의 말만 믿고 투자하면 위험합니다.",
+    "장기투자가 답 - 10년 이상 보유 시 손실 확률이 급격히 낮아집니다.",
+    "원금 보장은 없다 - 높은 수익률을 약속하는 투자는 사기일 가능성이 높습니다.",
+    "비상금부터 확보 - 생활비 6개월치는 예금으로 먼저 준비하세요."
+  ];
+
+  function showRandomETF() {
+    const info = etfFacts[Math.floor(Math.random() * etfFacts.length)];
+    document.getElementById("randomInfo").innerText = "👉 " + info;
+  }
+
+  // 시뮬레이터
+  let selectedAmount = null;
+
+  function selectAmount(amount) {
+    selectedAmount = amount;
+    const btns = document.querySelectorAll(".amount-btn");
+    btns.forEach(b => b.classList.remove("active"));
+    // 클릭한 버튼에 active
+    btns.forEach(b => {
+      if (b.textContent.includes(amount.toLocaleString("ko-KR"))) {
+        b.classList.add("active");
+      }
+    });
+  }
+
+function runSimulation() {
+  const resultEl = document.getElementById("simResult");
+  if (!selectedAmount) {
+    resultEl.innerHTML = "먼저 투자 금액을 선택해주세요.";
+    return;
+  }
+
+  const daily = selectedAmount;
+  const annualRate = 0.08; // 연복리 8% 가정 (현실적)
+  const totalYears = 10;
+  const interestYears = totalYears - 1; // 첫 해는 원금만 쌓임
+  const daysPerYear = 250; // 영업일 기준
+
+  // 총 원금
+  const principal = daily * daysPerYear * totalYears;
+
+  // 미래 가치 = (첫 해 원금 + 이후 일일 납입금 총합) × 연복리^(9년)
+  // 첫 해 원금 (1년 뒤부터 복리 적용)
+  const firstYearPrincipal = daily * daysPerYear;
+
+  // 이후 2~10년 납입금 (총 9년)
+  const restPrincipal = daily * daysPerYear * interestYears;
+
+  // 전체 원금에 대해 9년간 연복리 적용
+  const fv = (firstYearPrincipal + restPrincipal) * Math.pow(1 + annualRate, interestYears);
+
+  const profit = fv - principal;
+
+  resultEl.innerHTML =
+    `<p>📌 <strong>일 ${daily.toLocaleString("ko-KR")}원</strong>씩 10년 투자 시</p>
+     <p>· 총 납입 원금: <strong>${principal.toLocaleString("ko-KR")}원</strong></p>
+     <p>· 미래 가치(연복리 ${interestYears}회): <strong>${Math.round(fv).toLocaleString("ko-KR")}원</strong></p>
+     <p>· 평가차익: <strong>${Math.round(profit).toLocaleString("ko-KR")}원</strong></p>`;
+}
+
+</script>
+
+</body>
+</html>
