@@ -676,7 +676,7 @@ function runSimulation() {
   const profit = fv - principal;
 
   resultEl.innerHTML =
-    `<p>📌 <strong>일 ${daily.toLocaleString("ko-KR")}원</strong>씩 10년 투자 시</p>
+    `<p>📌 <strong>일 ${daily.toLocaleString("ko-KR")}원</strong>씩 10년 투자 시(연 8% 수익률 가정)</p>
      <p>· 총 납입 원금: <strong>${principal.toLocaleString("ko-KR")}원</strong></p>
      <p>· 미래 가치(연복리 ${interestYears}회): <strong>${Math.round(fv).toLocaleString("ko-KR")}원</strong></p>
      <p>· 평가차익: <strong>${Math.round(profit).toLocaleString("ko-KR")}원</strong></p>`;
