@@ -186,6 +186,60 @@
     margin-top: 2px;
   }
 
+.poll-option {
+  margin-bottom: 10px;
+}
+
+.poll-vote-btn {
+  border-radius: 999px;
+  border: 1px solid #dde1ff;
+  background: #f7f8ff;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.poll-vote-btn.voted {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.poll-result {
+  margin-top: 4px;
+  display: none;             /* 기본은 안 보이게 */
+  align-items: center;
+  gap: 6px;
+}
+
+.poll-result.visible {        /* 결과 보여줄 때만 */
+  display: flex;
+}
+
+.poll-bar-bg {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.poll-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  width: 0%;
+}
+
+.poll-percent {
+  min-width: 32px;
+}
+
+.poll-count {
+  font-size: 11px;
+  color: #555;
+}
+
   /* 시뮬레이터 */
   .sim-header {
     font-size: 13px;
@@ -242,34 +296,78 @@
     font-size: 13px;
   }
 
-  /* 작은 화면에서 여백 조정 */
-  @media (min-width: 640px) {
-    body {
-      padding-top: 24px;
-    }
-    .box {
-      padding: 22px 22px;
-    }
 .engagement-box {
-  margin-top: 2rem;
-  padding: 1rem 1.25rem;
-  border-radius: 8px;
+  max-width: 540px;
+  margin: 24px auto 0;
+  padding: 12px 16px;
+  border-radius: 12px;
   background: #f7f7fb;
   font-size: 0.95rem;
 }
 
 #like-btn {
-  margin-top: 0.5rem;
-  padding: 0.4rem 0.8rem;
+  margin-top: 8px;
+  padding: 8px 16px;        /* 크기 살짝 업 */
   border-radius: 999px;
   border: 1px solid #ddd;
-  background: white;
+  background: #ffffff;
   cursor: pointer;
+  font-size: 0.9rem;        /* 글자 키우기 */
 }
 
 #like-btn.liked {
   border-color: #ff4d6a;
   background: #ffe6ec;
+}
+
+.poll-option {
+  margin-bottom: 10px;
+}
+
+.poll-vote-btn {
+  border-radius: 999px;
+  border: 1px solid #dde1ff;
+  background: #f7f8ff;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.poll-vote-btn.voted {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.poll-result {
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.poll-bar-bg {
+  flex: 1;
+  height: 10px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.poll-bar {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--accent);
+  width: 0%;
+}
+
+.poll-percent {
+  min-width: 32px;
+}
+
+.poll-count {
+  font-size: 11px;
+  color: #555;
 }
   }
 </style>
@@ -631,6 +729,80 @@
   </button>
 </div>
 
+<div class="box">
+  <h2 style="font-size:16px; margin-bottom:8px;">🗳️ 다음 중 어떤 내용을 더 알고 싶나요?</h2>
+  <p style="font-size:13px; color:#555; margin-top:0;">
+    가장 관심 가는 한 가지를 골라주세요.
+  </p>
+  <ul id="poll-list" style="list-style:none; padding-left:0; font-size:13px; margin-top:10px;">
+    <li class="poll-option" data-key="fx">
+      <button type="button" class="poll-vote-btn">💱 환율·달러</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="us">
+      <button type="button" class="poll-vote-btn">🇺🇸 미국 주식/ETF</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="kr">
+      <button type="button" class="poll-vote-btn">🇰🇷 한국 주식/ETF</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="bond">
+      <button type="button" class="poll-vote-btn">📉 채권·MMF</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="tax">
+      <button type="button" class="poll-vote-btn">🧾 세금·절세</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="coin">
+      <button type="button" class="poll-vote-btn">🪙 코인(가상자산)</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="re">
+      <button type="button" class="poll-vote-btn">🏠 부동산·리츠</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+    <li class="poll-option" data-key="mind">
+      <button type="button" class="poll-vote-btn">🧠 투자 멘탈·심리</button>
+      <div class="poll-result">
+        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+        <span class="poll-percent">0%</span>
+        <span class="poll-count">(0표)</span>
+      </div>
+    </li>
+  </ul>
+  <p id="poll-message" style="font-size:12px;color:#777;margin-top:6px;"></p>
+</div>
+
 <script>
   function toggleContent(id) {
     const c = document.getElementById(id);
@@ -721,34 +893,38 @@ function runSimulation(years) {
 }
 
 
-  // 이 프로젝트에서만 쓸 고유 이름
-  const NAMESPACE = 'bethej2love-lab-guide';
-  const PAGE_KEY = 'sp500-guide';   // 이 페이지용
-  const LIKE_KEY = 'sp500-likes';   // 좋아요용
+  // =========================
+  // 방문자 수 + 유용해요 카운트
+  // =========================
+
+  const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
+
+  const VISIT_KEY = 'bethej2love-lab-guide-sp500-visits'; // 페이지 방문수
+  const LIKE_KEY  = 'bethej2love-lab-guide-sp500-likes';  // 유용해요 수
 
   const visitSpan = document.getElementById('visit-count');
-  const likeBtn = document.getElementById('like-btn');
-  const likeSpan = document.getElementById('like-count');
+  const likeBtn   = document.getElementById('like-btn');
+  const likeSpan  = document.getElementById('like-count');
 
-  // 1) 방문자수 카운트 (페이지 들어올 때마다 +1)
-  fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${PAGE_KEY}`)
-    .then(response => response.json())
+  // 1) 방문자 수: 페이지 들어올 때마다 +1
+  fetch(`${COUNTER_BASE}/hit/${VISIT_KEY}`)
+    .then(res => res.json())
     .then(data => {
-      // data.value 에 누적 카운트가 들어옴
-      visitSpan.textContent = data.value.toLocaleString();
+      const value = Number(data.value || 0);
+      visitSpan.textContent = value.toLocaleString('ko-KR');
     })
     .catch(err => {
       console.error('visit counter error', err);
       visitSpan.textContent = '-';
     });
 
-  // 2) 좋아요 현재 값 불러오기
+  // 2) 유용해요 현재 값 가져오기
   function loadLikes() {
-    fetch(`https://api.countapi.xyz/get/${NAMESPACE}/${LIKE_KEY}`)
-      .then(response => response.json())
+    fetch(`${COUNTER_BASE}/get/${LIKE_KEY}`)
+      .then(res => res.json())
       .then(data => {
-        const value = (typeof data.value === 'number') ? data.value : 0;
-        likeSpan.textContent = value.toLocaleString();
+        const value = Number(data.value || 0);
+        likeSpan.textContent = value.toLocaleString('ko-KR');
       })
       .catch(err => {
         console.error('like counter error', err);
@@ -757,7 +933,7 @@ function runSimulation(years) {
 
   loadLikes();
 
-  // 3) 같은 브라우저에서 여러 번 좋아요 못 누르게 막기 (localStorage 사용)
+  // 3) 같은 브라우저에서 여러 번 좋아요 못 누르게 (localStorage)
   const LIKE_STORAGE_KEY = 'liked-sp500-guide';
 
   if (localStorage.getItem(LIKE_STORAGE_KEY)) {
@@ -768,10 +944,11 @@ function runSimulation(years) {
   likeBtn.addEventListener('click', () => {
     if (localStorage.getItem(LIKE_STORAGE_KEY)) return;
 
-    fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${LIKE_KEY}`)
-      .then(response => response.json())
+    fetch(`${COUNTER_BASE}/hit/${LIKE_KEY}`)
+      .then(res => res.json())
       .then(data => {
-        likeSpan.textContent = data.value.toLocaleString();
+        const value = Number(data.value || 0);
+        likeSpan.textContent = value.toLocaleString('ko-KR');
         localStorage.setItem(LIKE_STORAGE_KEY, 'true');
         likeBtn.classList.add('liked');
         likeBtn.disabled = true;
@@ -780,7 +957,118 @@ function runSimulation(years) {
         console.error('like hit error', err);
       });
   });
+   // =========================
+  // 주제별 투표 + 그래프
+  // =========================
 
+  const POLL_BASE_KEY   = 'bethej2love-lab-guide-topic-';
+  const POLL_STORAGE_KEY = 'poll-voted-sp500-guide';
+
+  const pollOptions = [
+    { key: 'fx',   label: '환율·달러' },
+    { key: 'us',   label: '미국 주식/ETF' },
+    { key: 'kr',   label: '한국 주식/ETF' },
+    { key: 'bond', label: '채권·MMF' },
+    { key: 'tax',  label: '세금·절세' },
+    { key: 'coin', label: '코인' },
+    { key: 're',   label: '부동산·리츠' },
+    { key: 'mind', label: '투자 멘탈·심리' },
+  ];
+
+  const pollMessageEl = document.getElementById('poll-message');
+
+  async function loadPollAndShow() {
+    const optionEls = document.querySelectorAll('.poll-option');
+    const counts = {};
+    let total = 0;
+
+    await Promise.all(
+      pollOptions.map(async (opt) => {
+        try {
+          const res = await fetch(`${COUNTER_BASE}/get/${POLL_BASE_KEY}${opt.key}`);
+          const data = await res.json();
+          const value = Number(data.value || 0);
+          counts[opt.key] = value;
+          total += value;
+        } catch (e) {
+          console.error('poll get error', opt.key, e);
+          counts[opt.key] = 0;
+        }
+      })
+    );
+
+    optionEls.forEach((li) => {
+      const key = li.getAttribute('data-key');
+      const count = counts[key] || 0;
+      const percent = total > 0 ? Math.round((count / total) * 100) : 0;
+
+      const bar       = li.querySelector('.poll-bar');
+      const percentEl = li.querySelector('.poll-percent');
+      const countEl   = li.querySelector('.poll-count');
+      const resultBox = li.querySelector('.poll-result');
+
+      if (bar)       bar.style.width = percent + '%';
+      if (percentEl) percentEl.textContent = percent + '%';
+      if (countEl)   countEl.textContent   = `(${count}표)`;
+      if (resultBox) resultBox.classList.add('visible'); // 이제 그래프 보이게
+    });
+
+    if (total > 0) {
+      pollMessageEl.textContent = `지금까지 총 ${total.toLocaleString('ko-KR')}명이 투표했습니다.`;
+    } else {
+      pollMessageEl.textContent = '';
+    }
+  }
+
+  // 이미 투표했는지 체크
+  const votedKey = localStorage.getItem(POLL_STORAGE_KEY);
+  const allPollButtons = document.querySelectorAll('.poll-vote-btn');
+
+  if (votedKey) {
+    // 버튼 비활성 + 내가 고른 항목 표시
+    allPollButtons.forEach(btn => {
+      btn.disabled = true;
+    });
+    const votedBtn = document.querySelector(`.poll-option[data-key="${votedKey}"] .poll-vote-btn`);
+    if (votedBtn) {
+      votedBtn.classList.add('voted');
+    }
+    // 이미 투표한 사용자에겐 페이지 들어오자마자 결과 보여주기
+    loadPollAndShow();
+  } else {
+    pollMessageEl.textContent = '관심 있는 주제를 하나 골라주세요 🙂';
+  }
+
+  // 버튼 클릭 핸들러
+  allPollButtons.forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const li  = btn.closest('.poll-option');
+      const key = li.getAttribute('data-key');
+
+      if (localStorage.getItem(POLL_STORAGE_KEY)) return;
+
+      try {
+        const res = await fetch(`${COUNTER_BASE}/hit/${POLL_BASE_KEY}${key}`);
+        await res.json();
+
+        localStorage.setItem(POLL_STORAGE_KEY, key);
+
+        allPollButtons.forEach(b => {
+          b.disabled = true;
+        });
+        btn.classList.add('voted');
+
+        pollMessageEl.textContent = '투표해주셔서 감사합니다! 결과를 불러오는 중이에요 🙌';
+        loadPollAndShow();
+      } catch (e) {
+        console.error('poll vote error', e);
+        pollMessageEl.textContent = '잠시 후 다시 시도해주세요 🙏';
+      }
+    });
+  });
+
+  // 초기 로딩 시 결과 불러오기
+  loadPoll();
 </script>
 
 </body>
