@@ -299,25 +299,60 @@
 .engagement-box {
   max-width: 540px;
   margin: 24px auto 0;
-  padding: 12px 16px;
+  padding: 10px 16px;
   border-radius: 12px;
   background: #f7f7fb;
   font-size: 0.95rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
 #like-btn {
-  margin-top: 8px;
-  padding: 8px 16px;        /* 크기 살짝 업 */
+  padding: 8px 18px;
   border-radius: 999px;
   border: 1px solid #ddd;
   background: #ffffff;
   cursor: pointer;
-  font-size: 0.9rem;        /* 글자 키우기 */
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+#like-btn span {
+  font-weight: 600;
 }
 
 #like-btn.liked {
-  border-color: #ff4d6a;
-  background: #ffe6ec;
+  border-color: #4caf50;
+  background: #e7f7ea;
+}
+
+.engagement-meta {
+  font-size: 0.9rem;
+  text-align: right;
+}
+
+.poll-toggle-btn {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 999px;
+  border: 1px solid #dde1ff;
+  background: #f4f6ff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.poll-toggle-btn.open {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .poll-option {
@@ -480,6 +515,7 @@
       </p>
     </div>
   </div>
+
 <!-- 배당 설명 -->
 <div class="section">
   <div class="toggle" onclick="toggleContent('dividend1')">
@@ -718,89 +754,93 @@
 </div>
 
 <div class="engagement-box">
-  <p>
-    👀 Total visitors:
-    <strong><span id="visit-count">...</span></strong> 
-  </p>
-
   <button id="like-btn" type="button">
-    ❤️ 유용해요
-    (<span id="like-count">0</span>)
+    👍 <span id="like-count">0</span>
   </button>
+
+  <div class="engagement-meta">
+    👀 Total visitors:
+    <strong><span id="visit-count">...</span></strong>
+  </div>
 </div>
 
 <div class="box">
-  <h2 style="font-size:16px; margin-bottom:8px;">🗳️ 다음 중 어떤 내용을 더 알고 싶나요?</h2>
-  <p style="font-size:13px; color:#555; margin-top:0;">
-    가장 관심 가는 한 가지를 골라주세요.
-  </p>
-  <ul id="poll-list" style="list-style:none; padding-left:0; font-size:13px; margin-top:10px;">
-    <li class="poll-option" data-key="fx">
-      <button type="button" class="poll-vote-btn">💱 환율·달러</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="us">
-      <button type="button" class="poll-vote-btn">🇺🇸 미국 주식/ETF</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="kr">
-      <button type="button" class="poll-vote-btn">🇰🇷 한국 주식/ETF</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="bond">
-      <button type="button" class="poll-vote-btn">📉 채권·MMF</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="tax">
-      <button type="button" class="poll-vote-btn">🧾 세금·절세</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="coin">
-      <button type="button" class="poll-vote-btn">🪙 코인(가상자산)</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="re">
-      <button type="button" class="poll-vote-btn">🏠 부동산·리츠</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-    <li class="poll-option" data-key="mind">
-      <button type="button" class="poll-vote-btn">🧠 투자 멘탈·심리</button>
-      <div class="poll-result">
-        <div class="poll-bar-bg"><div class="poll-bar"></div></div>
-        <span class="poll-percent">0%</span>
-        <span class="poll-count">(0표)</span>
-      </div>
-    </li>
-  </ul>
-  <p id="poll-message" style="font-size:12px;color:#777;margin-top:6px;"></p>
+  <button id="poll-toggle-btn" class="poll-toggle-btn">
+    🗳️ 다음 중 어떤 내용을 더 알고 싶나요?
+  </button>
+
+  <div id="poll-container" style="display:none; margin-top:10px;">
+    <p style="font-size:13px; color:#555; margin-top:0;">
+      가장 관심 가는 한 가지를 골라주세요.
+    </p>
+    <ul id="poll-list" style="list-style:none; padding-left:0; font-size:13px; margin-top:10px;">
+      <li class="poll-option" data-key="fx">
+        <button type="button" class="poll-vote-btn">💱 환율·달러</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="us">
+        <button type="button" class="poll-vote-btn">🇺🇸 미국 주식/ETF</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="kr">
+        <button type="button" class="poll-vote-btn">🇰🇷 한국 주식/ETF</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="bond">
+        <button type="button" class="poll-vote-btn">📉 채권·MMF</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="tax">
+        <button type="button" class="poll-vote-btn">🧾 세금·절세</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="coin">
+        <button type="button" class="poll-vote-btn">🪙 코인(가상자산)</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="re">
+        <button type="button" class="poll-vote-btn">🏠 부동산·리츠</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+      <li class="poll-option" data-key="mind">
+        <button type="button" class="poll-vote-btn">🧠 투자 멘탈·심리</button>
+        <div class="poll-result">
+          <div class="poll-bar-bg"><div class="poll-bar"></div></div>
+          <span class="poll-percent">0%</span>
+          <span class="poll-count">0표</span>
+        </div>
+      </li>
+    </ul>
+    <p id="poll-message" style="font-size:12px;color:#777;margin-top:6px;"></p>
+  </div>
 </div>
 
 <script>
@@ -828,70 +868,58 @@
     "복리의 마법 - 10%씩 30년 투자하면 원금이 17배가 됩니다. 일찍 시작할수록 유리합니다.",
     "잃지 않는 것이 먼저 - 50% 손실을 회복하려면 100% 수익이 필요합니다.",
     "시장 타이밍은 불가능 - 최고점과 최저점을 맞추려 하지 말고 꾸준히 투자하세요.",
-    "수수료도 수익률 - 연 1%의 수수료 차이가 30년 후엔 25% 이상 수익 차이를 만듭니다.",
-    "감정은 최대의 적 - 공포에 팔고 탐욕에 사면 손해를 봅니다.",
-    "이해하지 못하는 것에 투자하지 마라 - 유행이나 남의 말만 믿고 투자하면 위험합니다.",
-    "장기투자가 답 - 10년 이상 보유 시 손실 확률이 급격히 낮아집니다.",
-    "원금 보장은 없다 - 높은 수익률을 약속하는 투자는 사기일 가능성이 높습니다.",
-    "비상금부터 확보 - 생활비 6개월치는 예금으로 먼저 준비하세요.",
-    "S&P500의 역사적 평균 수익률은 연 약 10%지만, 매년 10%씩 오르는 게 아니라 들쭉날쭉해요.",
-    "2008년 금융위기 때 S&P500은 -37% 폭락했지만, 5년 후 완전히 회복했어요.",
-    "미국 시장이 쉬는 날(주말, 공휴일)에는 주식 모으기도 자동으로 쉬어요.",
-    "증권사마다 미국 주식 거래 수수료가 다르니, 본인 증권사 수수료율을 확인해보세요.",
-    "10년 이상 장기투자 시, S&P500의 마이너스 수익률 확률은 역사적으로 거의 0%에 가까워요."
+    "장기 투자에서 가장 중요한 건 '계속 시장에 남아있는 것'입니다."
   ];
 
   function showRandomETF() {
-    const info = etfFacts[Math.floor(Math.random() * etfFacts.length)];
-    document.getElementById("randomInfo").innerText = "👉 " + info;
+    const box = document.getElementById("randomInfo");
+    const idx = Math.floor(Math.random() * etfFacts.length);
+    box.textContent = etfFacts[idx];
   }
 
-  // 시뮬레이터
+  // 시뮬레이터 관련 함수들 (지금 쓰고 있는 거 그대로 두면 됨)
   let selectedAmount = null;
 
   function selectAmount(amount) {
     selectedAmount = amount;
-    const btns = document.querySelectorAll(".amount-btn");
-    btns.forEach(b => b.classList.remove("active"));
-    // 클릭한 버튼에 active
-    btns.forEach(b => {
-      if (b.textContent.includes(amount.toLocaleString("ko-KR"))) {
-        b.classList.add("active");
+    const buttons = document.querySelectorAll(".amount-btn");
+    buttons.forEach((btn) => {
+      btn.classList.remove("active");
+      if (btn.textContent.includes(amount.toLocaleString("ko-KR"))) {
+        btn.classList.add("active");
       }
     });
   }
 
-function runSimulation(years) {
-  const resultEl = document.getElementById("simResult");
-  if (!selectedAmount) {
-    resultEl.innerHTML = "먼저 투자 금액을 선택해주세요.";
-    return;
+  function runSimulation(years) {
+    const resultEl = document.getElementById("simResult");
+    if (!selectedAmount) {
+      resultEl.textContent = "먼저 투자 금액(일 단위)을 선택해주세요!";
+      return;
+    }
+
+    const daily = selectedAmount;
+    const daysPerYear = 250;
+    const yearly = daily * daysPerYear;
+
+    const r = 0.08;
+    const n = years;
+
+    const fv = yearly * ((Math.pow(1 + r, n) - 1) / r);
+    const principal = yearly * n;
+    const profit = fv - principal;
+
+    resultEl.innerHTML =
+      `<p>📌 <strong>하루 ${daily.toLocaleString("ko-KR")}원</strong>을 ` +
+      `${n}년 동안 (연 ${(r * 100).toFixed(0)}% 가정) 투자했다고 보면…</p>
+       <p>· 총 납입 원금: <strong>${principal.toLocaleString("ko-KR")}원</strong></p>
+       <p>· 미래 가치(단순 연복리): <strong>${Math.round(fv).toLocaleString("ko-KR")}원</strong></p>
+       <p>· 평가차익: <strong>${Math.round(profit).toLocaleString("ko-KR")}원</strong></p>
+       <p style="font-size:11px;color:#777;">
+         ※ 실제 시장 수익률·환율·세금·수수료 등을 전혀 반영하지 않은,
+         아주 단순한 예시 계산입니다.
+       </p>`;
   }
-
-  const daily = selectedAmount;          // 하루 투자 금액 (예: 1,000원)
-  const daysPerYear = 250;               // 1년 영업일 수 가정
-  const yearly = daily * daysPerYear;    // 1년에 실제로 들어가는 돈
-
-  const r = 0.08;                        // 연 수익률 8% 가정 (단순 연복리)
-  const n = years;                       // 투자 기간 (10년 or 30년)
-
-  // 적립식 연복리 공식: P * [((1+r)^n - 1) / r]
-  const fv = yearly * ((Math.pow(1 + r, n) - 1) / r);
-  const principal = yearly * n;
-  const profit = fv - principal;
-
-  resultEl.innerHTML =
-    `<p>📌 <strong>하루 ${daily.toLocaleString("ko-KR")}원</strong>을 ` +
-    `${n}년 동안 (연 ${(r * 100).toFixed(0)}% 가정) 투자했다고 보면…</p>
-     <p>· 총 납입 원금: <strong>${principal.toLocaleString("ko-KR")}원</strong></p>
-     <p>· 미래 가치(단순 연복리): <strong>${Math.round(fv).toLocaleString("ko-KR")}원</strong></p>
-     <p>· 평가차익: <strong>${Math.round(profit).toLocaleString("ko-KR")}원</strong></p>
-     <p style="font-size:11px;color:#777;">
-       ※ 실제 시장 수익률·환율·세금·수수료 등을 전혀 반영하지 않은,
-       아주 단순한 예시 계산입니다.
-     </p>`;
-}
-
 
   // =========================
   // 방문자 수 + 유용해요 카운트
@@ -899,8 +927,8 @@ function runSimulation(years) {
 
   const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
 
-  const VISIT_KEY = 'bethej2love-lab-guide-sp500-visits'; // 페이지 방문수
-  const LIKE_KEY  = 'bethej2love-lab-guide-sp500-likes';  // 유용해요 수
+  const VISIT_KEY = 'bethej2love-lab-guide-sp500-visits';
+  const LIKE_KEY  = 'bethej2love-lab-guide-sp500-likes';
 
   const visitSpan = document.getElementById('visit-count');
   const likeBtn   = document.getElementById('like-btn');
@@ -957,11 +985,12 @@ function runSimulation(years) {
         console.error('like hit error', err);
       });
   });
-   // =========================
+
+  // =========================
   // 주제별 투표 + 그래프
   // =========================
 
-  const POLL_BASE_KEY   = 'bethej2love-lab-guide-topic-';
+  const POLL_BASE_KEY    = 'bethej2love-lab-guide-topic-';
   const POLL_STORAGE_KEY = 'poll-voted-sp500-guide';
 
   const pollOptions = [
@@ -975,8 +1004,12 @@ function runSimulation(years) {
     { key: 'mind', label: '투자 멘탈·심리' },
   ];
 
-  const pollMessageEl = document.getElementById('poll-message');
+  const pollMessageEl  = document.getElementById('poll-message');
+  const pollToggleBtn  = document.getElementById('poll-toggle-btn');
+  const pollContainer  = document.getElementById('poll-container');
+  const allPollButtons = document.querySelectorAll('.poll-vote-btn');
 
+  // 그래프 그리는 함수 (투표 후에만 호출)
   async function loadPollAndShow() {
     const optionEls = document.querySelectorAll('.poll-option');
     const counts = {};
@@ -1009,8 +1042,8 @@ function runSimulation(years) {
 
       if (bar)       bar.style.width = percent + '%';
       if (percentEl) percentEl.textContent = percent + '%';
-      if (countEl)   countEl.textContent   = `(${count}표)`;
-      if (resultBox) resultBox.classList.add('visible'); // 이제 그래프 보이게
+      if (countEl)   countEl.textContent   = `${count}표`;   // 괄호 없이
+      if (resultBox) resultBox.classList.add('visible');     // 여기서만 그래프 표시
     });
 
     if (total > 0) {
@@ -1022,24 +1055,24 @@ function runSimulation(years) {
 
   // 이미 투표했는지 체크
   const votedKey = localStorage.getItem(POLL_STORAGE_KEY);
-  const allPollButtons = document.querySelectorAll('.poll-vote-btn');
 
   if (votedKey) {
-    // 버튼 비활성 + 내가 고른 항목 표시
     allPollButtons.forEach(btn => {
       btn.disabled = true;
     });
-    const votedBtn = document.querySelector(`.poll-option[data-key="${votedKey}"] .poll-vote-btn`);
+    const votedBtn = document.querySelector(
+      `.poll-option[data-key="${votedKey}"] .poll-vote-btn`
+    );
     if (votedBtn) {
       votedBtn.classList.add('voted');
     }
-    // 이미 투표한 사용자에겐 페이지 들어오자마자 결과 보여주기
-    loadPollAndShow();
+    // 이미 투표한 사람은, 토글로 열었을 때 바로 결과 로딩되도록만 처리
+    pollMessageEl.textContent = '이미 한 번 투표하셨어요 🙂';
   } else {
     pollMessageEl.textContent = '관심 있는 주제를 하나 골라주세요 🙂';
   }
 
-  // 버튼 클릭 핸들러
+  // 투표 버튼 클릭 핸들러
   allPollButtons.forEach((btn) => {
     btn.addEventListener('click', async () => {
       const li  = btn.closest('.poll-option');
@@ -1059,7 +1092,15 @@ function runSimulation(years) {
         btn.classList.add('voted');
 
         pollMessageEl.textContent = '투표해주셔서 감사합니다! 결과를 불러오는 중이에요 🙌';
-        loadPollAndShow();
+
+        // 그래프 로딩
+        await loadPollAndShow();
+
+        // 혹시 접혀 있으면 자동으로 펼치기
+        if (pollContainer && pollToggleBtn) {
+          pollContainer.style.display = 'block';
+          pollToggleBtn.classList.add('open');
+        }
       } catch (e) {
         console.error('poll vote error', e);
         pollMessageEl.textContent = '잠시 후 다시 시도해주세요 🙏';
@@ -1067,8 +1108,19 @@ function runSimulation(years) {
     });
   });
 
-  // 초기 로딩 시 결과 불러오기
-  loadPoll();
+  // "다음 중 어떤 내용을…" 토글 버튼
+  if (pollToggleBtn && pollContainer) {
+    pollToggleBtn.addEventListener('click', () => {
+      const isOpen = pollContainer.style.display === 'block';
+      pollContainer.style.display = isOpen ? 'none' : 'block';
+      pollToggleBtn.classList.toggle('open', !isOpen);
+
+      // 이미 투표한 사람 + 처음 여는 경우 → 열면서 그래프 바로 보여주기
+      if (!isOpen && localStorage.getItem(POLL_STORAGE_KEY)) {
+        loadPollAndShow();
+      }
+    });
+  }
 </script>
 
 </body>
