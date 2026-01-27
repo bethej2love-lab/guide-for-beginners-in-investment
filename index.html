@@ -9,6 +9,29 @@
     --accent: #4a7efc;
     --bg: #f5f5f5;
     --card-bg: #ffffff;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-tertiary: #777;
+    --border-color: #eee;
+    --shadow: rgba(0,0,0,0.06);
+    --toggle-bg: #eef1ff;
+    --sub-toggle-bg: #f4f6ff;
+    --sub-content-bg: #fcfcff;
+    --button-bg: #f7f8ff;
+  }
+
+  body.dark-mode {
+    --bg: #1a1a1a;
+    --card-bg: #252525;
+    --text-primary: #e8e8e8;
+    --text-secondary: #c0c0c0;
+    --text-tertiary: #a0a0a0;
+    --border-color: #3a3a3a;
+    --shadow: rgba(0,0,0,0.3);
+    --toggle-bg: #2a2a2a;
+    --sub-toggle-bg: #2f2f2f;
+    --sub-content-bg: #2a2a2a;
+    --button-bg: #2f2f2f;
   }
 
   body {
@@ -16,8 +39,9 @@
     background: var(--bg);
     margin: 0;
     padding: 16px 12px 32px;
-    color: #333;
+    color: var(--text-primary);
     line-height: 1.5;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   .box {
@@ -26,7 +50,8 @@
     background: var(--card-bg);
     padding: 20px 18px;
     border-radius: 16px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    box-shadow: 0 2px 10px var(--shadow);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
   }
 
   h1, h2 {
@@ -42,7 +67,7 @@
 
   p.subtitle {
     text-align: center;
-    color: #666;
+    color: var(--text-secondary);
     font-size: 13px;
     margin-top: 0;
     margin-bottom: 4px;
@@ -54,7 +79,7 @@
 
   .toggle {
     cursor: pointer;
-    background: #eef1ff;
+    background: var(--toggle-bg);
     padding: 12px 12px;
     border-radius: 12px;
     font-weight: 600;
@@ -63,16 +88,17 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    color: var(--text-primary);
   }
 
   .toggle span.chevron {
     font-size: 12px;
-    color: #555;
+    color: var(--text-secondary);
   }
 
 .sub-toggle {
   cursor: pointer;
-  background: #f4f6ff;
+  background: var(--sub-toggle-bg);
   padding: 10px 12px;
   border-radius: 10px;
   margin-left: 12px;
@@ -81,38 +107,44 @@
   font-weight: 500;
   display: flex;
   justify-content: space-between;
+  color: var(--text-primary);
 }
 .sub-toggle .chevron {
   font-size: 11px;
+  color: var(--text-secondary);
 }
 .sub-content {
   display: none;
   padding: 10px 12px;
-  background: #fcfcff;
+  background: var(--sub-content-bg);
   border-radius: 10px;
-  border: 1px solid #eee;
+  border: 1px solid var(--border-color);
   margin-left: 12px;
   margin-bottom: 6px;
   font-size: 13px;
+  color: var(--text-primary);
 }
 
 .bonus-toggle {
-  background: #eef1ff;
+  background: var(--toggle-bg);
   opacity: 0.85;
   font-size: 13px;
+  color: var(--text-primary);
 }
 .bonus-content {
   font-size: 13px;
+  color: var(--text-primary);
 }
 
   .content {
     display: none;
     padding: 10px 12px 12px;
-    background: #fafafa;
+    background: var(--bg);
     border-radius: 12px;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     margin-bottom: 6px;
     font-size: 14px;
+    color: var(--text-primary);
   }
 
   ul, ol {
@@ -144,12 +176,13 @@
   }
 
   .info-box {
-    background: #fafafa;
+    background: var(--bg);
     padding: 10px 12px;
     border-radius: 12px;
-    border: 1px solid #eee;
+    border: 1px solid var(--border-color);
     margin-top: 10px;
     font-size: 13px;
+    color: var(--text-primary);
   }
 
   /* ETF 비교 "차트" 스타일 */
@@ -182,7 +215,7 @@
 
   .etf-mini {
     font-size: 12px;
-    color: #666;
+    color: var(--text-secondary);
     margin-top: 2px;
   }
 
@@ -192,11 +225,12 @@
 
 .poll-vote-btn {
   border-radius: 999px;
-  border: 1px solid #dde1ff;
-  background: #f7f8ff;
+  border: 1px solid var(--border-color);
+  background: var(--button-bg);
   padding: 5px 10px;
   font-size: 12px;
   cursor: pointer;
+  color: #333;
 }
 
 .poll-vote-btn.voted {
@@ -237,13 +271,25 @@
 
 .poll-count {
   font-size: 11px;
-  color: #555;
+  color: var(--text-secondary);
+}
+
+#poll-reset-btn {
+  display: none;
+  margin-top: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--button-bg);
+  font-size: 12px;
+  cursor: pointer;
+  color: var(--text-secondary);
 }
 
   /* 시뮬레이터 */
   .sim-header {
     font-size: 13px;
-    color: #555;
+    color: var(--text-secondary);
     margin-bottom: 8px;
   }
 
@@ -257,12 +303,13 @@
   .amount-btn {
     flex: 1 1 calc(50% - 6px);
     border-radius: 999px;
-    border: 1px solid #dde1ff;
+    border: 1px solid var(--border-color);
     padding: 8px 0;
     font-size: 13px;
     text-align: center;
     cursor: pointer;
-    background: #f7f8ff;
+    background: var(--button-bg);
+    color: var(--text-primary);
   }
 
   .amount-btn.active {
@@ -282,12 +329,12 @@
 
   .sim-highlight {
     font-weight: 600;
-    color: #111827;
+    color: var(--text-primary);
   }
 
   .sim-assumption {
     font-size: 11px;
-    color: #777;
+    color: var(--text-tertiary);
     margin-top: 6px;
   }
 
@@ -295,6 +342,72 @@
   #randomInfo {
     font-size: 13px;
   }
+
+/* 다크모드 토글 & 공유 버튼 */
+.top-controls {
+  max-width: 540px;
+  margin: 0 auto 12px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.icon-btn {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.share-buttons {
+  position: relative;
+}
+
+.share-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 4px 12px var(--shadow);
+  z-index: 100;
+  min-width: 140px;
+}
+
+.share-dropdown.show {
+  display: block;
+}
+
+.share-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-primary);
+  transition: background 0.2s ease;
+}
+
+.share-option:hover {
+  background: var(--bg);
+}
 
 .engagement-box {
   max-width: 540px;
@@ -406,6 +519,25 @@
 </head>
 <body>
 
+<div class="top-controls">
+  <button id="dark-mode-btn" class="icon-btn" type="button">
+    <span id="dark-mode-icon">🌙</span>
+  </button>
+  <div class="share-buttons">
+    <button id="share-btn" class="icon-btn" type="button">
+      📤 공유
+    </button>
+    <div id="share-dropdown" class="share-dropdown">
+      <div class="share-option" data-type="kakao">
+        <span>💬</span> 카카오톡
+      </div>
+      <div class="share-option" data-type="copy">
+        <span>🔗</span> 링크 복사
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="box">
   <h1>📘 S&P500 ETF 얼렁뚱땅 가이드</h1>
   <p class="subtitle" style="color:#d00000;">
@@ -442,7 +574,7 @@
       <li>다음 투자에서 '원금 + 이익' 전체가 다시 불어남</li>
       <li>시간이 길수록 기하급수적으로 커지는 효과</li>
     </ul>
-    <p style="font-size:12px;color:#555;">※ ETF 적립식 투자는 복리를 자연스럽게 활용하는 방식</p>
+    <p style="font-size:12px;color:var(--text-secondary);">※ ETF 적립식 투자는 복리를 자연스럽게 활용하는 방식</p>
   </div>
 </div>
 
@@ -506,7 +638,7 @@
           <div class="etf-mini">규모 크고 안정적인 또 다른 S&P500 ETF</div>
         </div>
       </div>
-      <p style="font-size:12px; color:#777; margin-top:8px;">
+      <p style="font-size:12px; color:var(--text-tertiary); margin-top:8px;">
         📎 세 ETF 모두 'S&P500을 거의 똑같이 따라가는 상품'이라,  
         <strong>장기 분산투자</strong> 관점에서는 크게 다르지 않다고 보는 편입니다.
       </p>
@@ -528,7 +660,7 @@
       <li>ETF도 포함된 기업들의 배당을 모아 'ETF 배당'으로 지급</li>
       <li>미국 ETF의 배당은 보통 <strong>분기별(3개월마다)</strong> 지급</li>
     </ul>
-    <p style="font-size:13px; color:#666;">
+    <p style="font-size:13px; color:var(--text-secondary);">
       즉, ETF를 갖고 있으면 “가격 상승 수익 + 배당 수익”을 동시에 얻는 구조입니다.
     </p>
   </div>
@@ -546,7 +678,7 @@
     <li>분기마다 받는 배당이 자동으로 계좌에 들어옴</li>
   </ul>
 
-  <p style="font-size:12px;color:#777;">
+  <p style="font-size:12px;color:var(--text-tertiary);">
     ※ 정확한 배당률은 매월/매년 변하므로 “대략적인 투자 개념”으로 보는 게 좋습니다.
   </p>
 </div>
@@ -564,7 +696,7 @@
         <li><strong>1,000원 / 3,000원 / 5,000원 / 10,000원</strong> 등 금액 설정</li>
         <li>주기(매일/매주/매월)와 날짜 지정 → 자동 투자 시작</li>
       </ol>
-      <p style="font-size:12px; color:#777;">※ 실제 메뉴 위치/문구는 토스 업데이트에 따라 조금씩 달라질 수 있어.</p>
+      <p style="font-size:12px; color:var(--text-tertiary);">※ 실제 메뉴 위치/문구는 토스 업데이트에 따라 조금씩 달라질 수 있어.</p>
     </div>
   </div>
 
@@ -595,7 +727,7 @@
     <li>프리장: 밤 6:00 ~ 10:30</li>
     <li>애프터: 새벽 5:00 ~ 9:00</li>
   </ul>
-  <p style="font-size:12px;color:#777;">정확한 시간은 매년 서머타임에 따라 달라짐</p>
+  <p style="font-size:12px;color:var(--text-tertiary);">정확한 시간은 매년 서머타임에 따라 달라짐</p>
 </div>
 
 <!-- 상위: 환율 설명 -->
@@ -662,7 +794,7 @@
       <li>💡 팁: 연말에 손실 종목 정리하면 과세 낮출 수 있음</li>
     </ul>
 
-    <p style="font-size:12px;color:#777;">
+    <p style="font-size:12px;color:var(--text-tertiary);">
       ※ (미국 상장) ETF의 분배금도 배당과 동일하게 15% 자동 원천징수
     </p>
   </div>
@@ -756,7 +888,7 @@
   </button>
 
   <div id="poll-container" style="display:none; margin-top:10px;">
-    <p style="font-size:13px; color:#555; margin-top:0;">
+    <p style="font-size:13px; color:var(--text-secondary); margin-top:0;">
       가장 관심 가는 한 가지를 골라주세요.
     </p>
     <ul id="poll-list" style="list-style:none; padding-left:0; font-size:13px; margin-top:10px;">
@@ -825,8 +957,8 @@
         </div>
       </li>
     </ul>
-    <p id="poll-message" style="font-size:12px;color:#777;margin-top:6px;"></p>
-    <button id="poll-reset-btn" type="button" style="display:none; margin-top:8px; padding:6px 14px; border-radius:999px; border:1px solid #ddd; background:#f7f8ff; font-size:12px; cursor:pointer; color:#666;">
+    <p id="poll-message" style="font-size:12px;color:var(--text-tertiary);margin-top:6px;"></p>
+    <button id="poll-reset-btn" type="button">
       🔄 투표 다시 하기
     </button>
   </div>
@@ -842,6 +974,82 @@
   </div>
 
 <script>
+  // =========================
+  // 다크모드 & 공유 기능
+  // =========================
+  
+  // 다크모드
+  const darkModeBtn = document.getElementById('dark-mode-btn');
+  const darkModeIcon = document.getElementById('dark-mode-icon');
+  const DARK_MODE_KEY = 'dark-mode-sp500-guide';
+  
+  // 저장된 다크모드 설정 불러오기
+  if (localStorage.getItem(DARK_MODE_KEY) === 'true') {
+    document.body.classList.add('dark-mode');
+    darkModeIcon.textContent = '☀️';
+  }
+  
+  darkModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isDark = document.body.classList.contains('dark-mode');
+    darkModeIcon.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem(DARK_MODE_KEY, isDark);
+  });
+  
+  // 공유 기능
+  const shareBtn = document.getElementById('share-btn');
+  const shareDropdown = document.getElementById('share-dropdown');
+  const shareOptions = document.querySelectorAll('.share-option');
+  
+  shareBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    shareDropdown.classList.toggle('show');
+  });
+  
+  // 드롭다운 외부 클릭 시 닫기
+  document.addEventListener('click', () => {
+    shareDropdown.classList.remove('show');
+  });
+  
+  shareOptions.forEach(option => {
+    option.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const type = option.getAttribute('data-type');
+      const url = window.location.href;
+      const title = 'S&P500 ETF 얼렁뚱땅 가이드 📘';
+      const text = '초심자를 위한 S&P500 ETF 투자 가이드';
+      
+      if (type === 'kakao') {
+        // 카카오톡 공유 (모바일에서만 작동)
+        if (navigator.share) {
+          navigator.share({
+            title: title,
+            text: text,
+            url: url
+          }).catch(() => {
+            // 실패 시 링크 복사
+            navigator.clipboard.writeText(url);
+            alert('링크가 복사되었습니다!\n카카오톡에서 직접 붙여넣어주세요.');
+          });
+        } else {
+          // Web Share API 미지원 시 링크 복사
+          navigator.clipboard.writeText(url);
+          alert('링크가 복사되었습니다!\n카카오톡에서 직접 붙여넣어주세요.');
+        }
+      } else if (type === 'copy') {
+        navigator.clipboard.writeText(url).then(() => {
+          const originalText = option.innerHTML;
+          option.innerHTML = '<span>✅</span> 복사됨!';
+          setTimeout(() => {
+            option.innerHTML = originalText;
+          }, 2000);
+        });
+      }
+      
+      shareDropdown.classList.remove('show');
+    });
+  });
+
   function toggleContent(id) {
     const c = document.getElementById(id);
     const box = c.previousElementSibling; // toggle div
@@ -913,7 +1121,7 @@
        <p>· 총 납입 원금: <strong>${principal.toLocaleString("ko-KR")}원</strong></p>
        <p>· 미래 가치(단순 연복리): <strong>${Math.round(fv).toLocaleString("ko-KR")}원</strong></p>
        <p>· 평가차익: <strong>${Math.round(profit).toLocaleString("ko-KR")}원</strong></p>
-       <p style="font-size:11px;color:#777;">
+       <p style="font-size:11px;color:var(--text-tertiary);">
          ※ 실제 시장 수익률·환율·세금·수수료 등을 전혀 반영하지 않은,
          아주 단순한 예시 계산입니다.
        </p>`;
@@ -922,6 +1130,8 @@
   // =========================
   // 주제별 투표 + 그래프
   // =========================
+
+  const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
 
   const POLL_BASE_KEY    = 'bethej2love-lab-guide-topic-';
   const POLL_STORAGE_KEY = 'poll-voted-sp500-guide';
@@ -1088,8 +1298,6 @@
   // =========================
   // 방문자 수 + 유용해요 카운트
   // =========================
-
-  const COUNTER_BASE = 'https://countapi.mileshilliard.com/api/v1';
 
   const VISIT_KEY = 'bethej2love-lab-guide-sp500-visits';
   const LIKE_KEY  = 'bethej2love-lab-guide-sp500-likes';
