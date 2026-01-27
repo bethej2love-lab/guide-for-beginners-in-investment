@@ -378,13 +378,6 @@
   border-color: var(--accent);
 }
 
-.poll-result {
-  margin-top: 4px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
 .poll-bar-bg {
   flex: 1;
   height: 10px;
@@ -833,6 +826,9 @@
       </li>
     </ul>
     <p id="poll-message" style="font-size:12px;color:#777;margin-top:6px;"></p>
+    <button id="poll-reset-btn" type="button" style="display:none; margin-top:8px; padding:6px 14px; border-radius:999px; border:1px solid #ddd; background:#f7f8ff; font-size:12px; cursor:pointer; color:#666;">
+      🔄 투표 다시 하기
+    </button>
   </div>
 
 <div class="engagement-box">
@@ -944,6 +940,7 @@
   const pollMessageEl  = document.getElementById('poll-message');
   const pollToggleBtn  = document.getElementById('poll-toggle-btn');
   const pollContainer  = document.getElementById('poll-container');
+  const pollResetBtn   = document.getElementById('poll-reset-btn');
   const allPollButtons = document.querySelectorAll('.poll-vote-btn');
 
   // 그래프 그리는 함수 (투표 후에만 호출)
@@ -1005,6 +1002,7 @@
     }
     // 이미 투표한 사람은, 토글로 열었을 때 바로 결과 로딩되도록만 처리
     pollMessageEl.textContent = '이미 한 번 투표하셨어요 🙂';
+    if (pollResetBtn) pollResetBtn.style.display = 'inline-block';
   } else {
     pollMessageEl.textContent = '관심 있는 주제를 하나 골라주세요 🙂';
   }
@@ -1029,6 +1027,7 @@
         btn.classList.add('voted');
 
         pollMessageEl.textContent = '투표해주셔서 감사합니다! 결과를 불러오는 중이에요 🙌';
+        if (pollResetBtn) pollResetBtn.style.display = 'inline-block';
 
         // 그래프 로딩
         await loadPollAndShow();
@@ -1045,6 +1044,31 @@
     });
   });
 
+  // "투표 다시 하기" 버튼
+  if (pollResetBtn) {
+    pollResetBtn.addEventListener('click', () => {
+      // localStorage에서 투표 기록 삭제
+      localStorage.removeItem(POLL_STORAGE_KEY);
+      
+      // 모든 버튼 활성화 및 스타일 초기화
+      allPollButtons.forEach(btn => {
+        btn.disabled = false;
+        btn.classList.remove('voted');
+      });
+      
+      // 그래프 숨기기
+      document.querySelectorAll('.poll-result').forEach(result => {
+        result.classList.remove('visible');
+      });
+      
+      // 메시지 초기화
+      pollMessageEl.textContent = '관심 있는 주제를 하나 골라주세요 🙂';
+      
+      // 리셋 버튼 숨기기
+      pollResetBtn.style.display = 'none';
+    });
+  }
+
   // "어떤 내용을…" 토글 버튼
   if (pollToggleBtn && pollContainer) {
     pollToggleBtn.addEventListener('click', () => {
@@ -1052,9 +1076,12 @@
       pollContainer.style.display = isOpen ? 'none' : 'block';
       pollToggleBtn.classList.toggle('open', !isOpen);
 
-      // 이미 투표한 사람 + 처음 여는 경우 → 열면서 그래프 바로 보여주기
+      // 이미 투표한 사람이 처음 열 때만 그래프 로딩
       if (!isOpen && localStorage.getItem(POLL_STORAGE_KEY)) {
-        loadPollAndShow();
+        const resultsAlreadyLoaded = document.querySelector('.poll-result.visible');
+        if (!resultsAlreadyLoaded) {
+          loadPollAndShow();
+        }
       }
     });
 
@@ -1071,17 +1098,37 @@
   const likeBtn   = document.getElementById('like-btn');
   const likeSpan  = document.getElementById('like-count');
 
-  // 1) 방문자 수: 페이지 들어올 때마다 +1
-  fetch(`${COUNTER_BASE}/hit/${VISIT_KEY}`)
-    .then(res => res.json())
-    .then(data => {
-      const value = Number(data.value || 0);
-      visitSpan.textContent = value.toLocaleString('ko-KR');
-    })
-    .catch(err => {
-      console.error('visit counter error', err);
-      visitSpan.textContent = '-';
-    });
+  // 1) 방문자 수: 하루에 한 번만 카운트
+  const VISIT_STORAGE_KEY = 'visited-sp500-guide-date';
+  const today = new Date().toDateString(); // "Tue Jan 27 2026" 형식
+  const lastVisit = localStorage.getItem(VISIT_STORAGE_KEY);
+
+  if (lastVisit !== today) {
+    // 오늘 처음 방문이면 카운트 증가
+    fetch(`${COUNTER_BASE}/hit/${VISIT_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        const value = Number(data.value || 0);
+        visitSpan.textContent = value.toLocaleString('ko-KR');
+        localStorage.setItem(VISIT_STORAGE_KEY, today);
+      })
+      .catch(err => {
+        console.error('visit counter error', err);
+        visitSpan.textContent = '-';
+      });
+  } else {
+    // 오늘 이미 방문했으면 현재 값만 가져오기
+    fetch(`${COUNTER_BASE}/get/${VISIT_KEY}`)
+      .then(res => res.json())
+      .then(data => {
+        const value = Number(data.value || 0);
+        visitSpan.textContent = value.toLocaleString('ko-KR');
+      })
+      .catch(err => {
+        console.error('visit counter error', err);
+        visitSpan.textContent = '-';
+      });
+  }
 
   // 2) 유용해요 현재 값 가져오기
   function loadLikes() {
