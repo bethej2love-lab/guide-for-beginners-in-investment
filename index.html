@@ -965,6 +965,41 @@
   </div>
 </div>
 
+<!-- S&P500 히트맵 -->
+<div class="box">
+  <button id="heatmap-toggle-btn" class="poll-toggle-btn">
+    📊 S&P500 히트맵 보기
+  </button>
+  
+  <div id="heatmap-container" style="display:none; margin-top:10px; font-size:14px; color:var(--text-primary); line-height:1.6;">
+    <p style="margin-top:0;">
+      <strong>히트맵(Heatmap)이란?</strong><br>
+      S&P500을 구성하는 500개 기업을 한눈에 보여주는 시각 자료입니다.
+    </p>
+    
+    <ul style="font-size:13px; margin-top:8px; margin-bottom:12px; padding-left:20px;">
+      <li><strong>박스 크기</strong> = 시가총액 (큰 기업일수록 큰 박스)</li>
+      <li><strong>색깔</strong> = 수익률 (초록=상승, 빨강=하락)</li>
+      <li><strong>티커(Ticker)</strong> = 기업의 고유 약자<br>
+          <span style="font-size:12px; color:var(--text-secondary);">예: AAPL=애플, MSFT=마이크로소프트, TSLA=테슬라</span>
+      </li>
+    </ul>
+    
+    <div style="padding: 0 4px;">
+      <a href="https://finviz.com/map.ashx?t=sec" 
+         target="_blank" 
+         rel="noopener noreferrer"
+         style="display:block; text-align:center; padding:10px 16px; background:var(--accent); color:white; text-decoration:none; border-radius:999px; font-weight:600; font-size:14px; margin-top:6px;">
+        🔗 Finviz에서 실시간 히트맵 보기
+      </a>
+    </div>
+    
+    <p style="font-size:11px; color:var(--text-tertiary); margin-top:8px; margin-bottom:0;">
+      💡 새 탭에서 열립니다. 실시간으로 업데이트되는 히트맵을 확인하세요!
+    </p>
+  </div>
+</div>
+
 <!-- 만든이가 좋아하는 투자 콘텐츠 -->
 <div class="box">
   <button id="content-toggle-btn" class="poll-toggle-btn">
@@ -1314,7 +1349,27 @@
 
   // "투표 다시 하기" 버튼
   if (pollResetBtn) {
-    pollResetBtn.addEventListener('click', () => {
+    pollResetBtn.addEventListener('click', async () => {
+      const previousVote = localStorage.getItem(POLL_STORAGE_KEY);
+      
+      // 이전 투표가 있으면 카운트 감소 시도
+      if (previousVote) {
+        try {
+          // 1. 현재 값 가져오기
+          const getRes = await fetch(`${COUNTER_BASE}/get/${POLL_BASE_KEY}${previousVote}`);
+          const getData = await getRes.json();
+          const currentValue = Number(getData.value || 0);
+          
+          // 2. -1 감소한 값으로 설정 (0 미만으로는 안 내려가게)
+          const newValue = Math.max(0, currentValue - 1);
+          await fetch(`${COUNTER_BASE}/set/${POLL_BASE_KEY}${previousVote}?value=${newValue}`);
+          
+          console.log(`${previousVote} 투표 취소: ${currentValue} → ${newValue}`);
+        } catch (e) {
+          console.warn('이전 투표 감소 실패', e);
+        }
+      }
+      
       // localStorage에서 투표 기록 삭제
       localStorage.removeItem(POLL_STORAGE_KEY);
       
@@ -1362,6 +1417,18 @@
       const isOpen = contentContainer.style.display === 'block';
       contentContainer.style.display = isOpen ? 'none' : 'block';
       contentToggleBtn.classList.toggle('open', !isOpen);
+    });
+  }
+
+  // "S&P500 히트맵 보기" 토글 버튼
+  const heatmapToggleBtn = document.getElementById('heatmap-toggle-btn');
+  const heatmapContainer = document.getElementById('heatmap-container');
+  
+  if (heatmapToggleBtn && heatmapContainer) {
+    heatmapToggleBtn.addEventListener('click', () => {
+      const isOpen = heatmapContainer.style.display === 'block';
+      heatmapContainer.style.display = isOpen ? 'none' : 'block';
+      heatmapToggleBtn.classList.toggle('open', !isOpen);
     });
   }
 
