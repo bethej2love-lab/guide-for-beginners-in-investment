@@ -412,7 +412,7 @@
 .engagement-box {
   max-width: 540px;
   margin: 24px auto 0;
-  padding: 10px 16px;
+  padding: 6px 16px;
   border-radius: 12px;
   font-size: 0.95rem;
 
@@ -421,6 +421,7 @@
   justify-content: space-between;
   gap: 12px;
   flex-wrap: wrap;
+
 }
 
 #like-btn {
@@ -962,7 +963,64 @@
       🔄 투표 다시 하기
     </button>
   </div>
+</div>
 
+<!-- 만든이가 좋아하는 투자 콘텐츠 -->
+<div class="box">
+  <button id="content-toggle-btn" class="poll-toggle-btn">
+    만든이가 좋아하는 투자 콘텐츠 🙃
+  </button>
+
+  <div id="content-container" style="display:none; margin-top:10px;">
+    <!-- 유튜브 채널 -->
+    <div style="margin-bottom: 16px;">
+      <p style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--text-primary);">
+        📺 유튜브 채널
+      </p>
+      <ul style="list-style:none; padding-left:0; font-size:13px; margin:0;">
+        <li style="margin-bottom:6px;">
+          <a href="https://www.youtube.com/@moneymoneycomics" target="_blank" rel="noopener noreferrer" 
+             style="color:var(--accent); text-decoration:none;">
+            • 머니코믹스
+          </a>
+        </li>
+        <li style="margin-bottom:6px;">
+          <a href="https://www.youtube.com/@wsaj" target="_blank" rel="noopener noreferrer" 
+             style="color:var(--accent); text-decoration:none;">
+            • 월가아재의 과학적 투자
+          </a>
+        </li>
+        <li style="margin-bottom:6px;">
+          <a href="https://www.youtube.com/@MickeyPedia" target="_blank" rel="noopener noreferrer" 
+             style="color:var(--accent); text-decoration:none;">
+            • 미키피디아
+          </a>
+        </li>
+        <li style="margin-bottom:6px;">
+          <a href="https://www.youtube.com/watch?v=FUXT_m6nzhg&list=PL066-ALa462CuaWCdQR7k4KNMJB-54HPC" target="_blank" rel="noopener noreferrer" 
+             style="color:var(--accent); text-decoration:none;">
+            • EBS 자본주의 시리즈
+          </a>
+      </ul>
+    </div>
+
+    <!-- 추천 책 -->
+    <div>
+      <p style="font-size:14px; font-weight:600; margin-bottom:8px; color:var(--text-primary);">
+        📖 추천 책
+      </p>
+      <ul style="list-style:none; padding-left:0; font-size:13px; margin:0; color:var(--text-primary);">
+        <li style="margin-bottom:4px;">• 돈의 심리학 / 모건 하우절</li>
+        <li style="margin-bottom:4px;">• 모든 주식을 소유하라 / 존 보글</li>
+        <li style="margin-bottom:4px;">• 돈의 속성 / 김승호</li>
+        <li style="margin-bottom:4px;">• 거인의 어깨 / 홍진채</li>
+        <li style="margin-bottom:4px;">• 부자 아빠 가난한 아빠 / 로버트 기요사키</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="box">
 <div class="engagement-box">
   <button id="like-btn" type="button">
     👍 <span id="like-count">0</span>
@@ -1294,6 +1352,18 @@
         }
       }
     });
+
+  // "만든이가 좋아하는 투자 콘텐츠" 토글 버튼
+  const contentToggleBtn = document.getElementById('content-toggle-btn');
+  const contentContainer = document.getElementById('content-container');
+  
+  if (contentToggleBtn && contentContainer) {
+    contentToggleBtn.addEventListener('click', () => {
+      const isOpen = contentContainer.style.display === 'block';
+      contentContainer.style.display = isOpen ? 'none' : 'block';
+      contentToggleBtn.classList.toggle('open', !isOpen);
+    });
+  }
 
   // =========================
   // 방문자 수 + 유용해요 카운트
