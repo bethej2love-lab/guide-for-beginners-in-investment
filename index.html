@@ -585,7 +585,7 @@
       <span>🧺 ETF란 무엇인가?</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c1">
-      <p>ETF는 '주식상장펀드'로, 여러 주식을 한 바구니처럼 묶어놓은 상품입니다.</p>
+      <p>ETF는 '주식상장펀드<em>Exchange Traded Fund</em>'로, 여러 주식을 한 바구니처럼 묶어놓은 상품입니다.</p>
       <ul>
         <li>SPY / VOO / IVV = 미국 대표 지수 <strong>S&P500</strong>을 따라가는 ETF</li>
         <li>즉, 미국 상위 500개 기업 전체에 나눠서 투자하는 효과</li>
@@ -609,12 +609,15 @@
     </div>
   </div>
 
-  <!-- ETF 비교 "차트" -->
+  <!-- ETF 비교 -->
   <div class="section">
     <div class="sub-toggle" onclick="toggleContent('c8')">
       <span>📊 대표 S&P500 ETF</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c8">
+      <p style="font-size:13px; font-weight:600; margin-top:0; margin-bottom:8px; color:var(--text-primary);">
+        🇺🇸 미국 상장 ETF (달러 투자)
+      </p>
       <div class="etf-chart">
         <div class="etf-row">
           <div class="etf-label"><strong>VOO (Vanguard)</strong></div>
@@ -629,9 +632,25 @@
           <div class="etf-mini">규모 크고 안정적인 또 다른 S&P500 ETF</div>
         </div>
       </div>
-      <p style="font-size:12px; color:var(--text-tertiary); margin-top:8px;">
-        📎 세 ETF 모두 'S&P500을 거의 똑같이 따라가는 상품'이라,  
-        <strong>장기 분산투자</strong> 관점에서는 크게 다르지 않다고 보는 편입니다.
+
+      <p style="font-size:13px; font-weight:600; margin-top:16px; margin-bottom:8px; color:var(--text-primary);">
+        🇰🇷 한국 상장 ETF (원화 투자)
+      </p>
+      <div class="etf-chart">
+        <div class="etf-row">
+          <div class="etf-label"><strong>TIGER 미국S&P500 (360750)</strong></div>
+          <div class="etf-mini">저비용(0.07%) + 원화로 직접 거래 + 초보자 추천</div>
+        </div>
+        <div class="etf-row">
+          <div class="etf-label"><strong>KODEX 미국S&P500TR (379800)</strong></div>
+          <div class="etf-mini">배당 자동 재투자(TR) + 장기 복리 효과</div>
+        </div>
+      </div>
+
+      <p style="font-size:12px; color:var(--text-tertiary); margin-top:12px;">
+        📎 <strong>미국 상장 ETF</strong>는 수수료가 더 저렴하지만 달러 환전이 필요하고,  
+        <strong>한국 상장 ETF</strong>는 원화로 바로 거래 가능해서 초보자에게 편리합니다.  
+        모두 S&P500을 추종하므로 장기 투자 관점에서는 큰 차이가 없습니다.
       </p>
     </div>
   </div>
