@@ -29,8 +29,8 @@
     --text-tertiary: #a0a0a0;
     --border-color: #3a3a3a;
     --shadow: rgba(0,0,0,0.3);
-    --toggle-bg: #2a2a2a;
-    --sub-toggle-bg: #2f2f2f;
+    --toggle-bg: #333333;
+    --sub-toggle-bg: #383838;
     --sub-content-bg: #2a2a2a;
     --button-bg: #2f2f2f;
   }
@@ -204,7 +204,7 @@
     width: 100%;
     height: 12px;
     border-radius: 999px;
-    background: #e5e7eb;
+    background: var(--border-color);
     overflow: hidden;
   }
 
@@ -222,16 +222,6 @@
 
 .poll-option {
   margin-bottom: 10px;
-}
-
-.poll-vote-btn {
-  border-radius: 999px;
-  border: 1px solid var(--border-color);
-  background: var(--button-bg);
-  padding: 5px 10px;
-  font-size: 12px;
-  cursor: pointer;
-  color: #333;
 }
 
 .poll-vote-btn.voted {
@@ -255,7 +245,7 @@
   flex: 1;
   height: 10px;
   border-radius: 999px;
-  background: #e5e7eb;
+  background: var(--border-color);
   overflow: hidden;
 }
 
@@ -364,6 +354,12 @@
   align-items: center;
   gap: 4px;
   transition: all 0.2s ease;
+  color: var(--text-primary);
+}
+
+body.dark-mode .icon-btn {
+  background: #2f2f2f;      /* 토글 계열과 유사한 밝기 */
+  border-color: #3a3a3a;
 }
 
 .icon-btn:hover {
@@ -451,6 +447,10 @@
   text-align: right;
 }
 
+body.dark-mode .engagement-meta strong {
+  color: #cfcfcf; /* 밝은 회색 */
+}
+
 .engagement-meta strong {
   color: #444;   /* 진한 차콜 느낌 */
   font-weight: 700;
@@ -478,6 +478,17 @@
   transform: translateY(-1px);
 }
 
+body.dark-mode .poll-toggle-btn {
+  background: #2f2f2f;     /* 더 어두운 회색 */
+  border-color: #3a3a3a;
+  color: var(--text-primary);
+}
+
+body.dark-mode .poll-toggle-btn:hover {
+  background: #353535;
+  border-color: #4a4a4a;
+}
+
 .poll-toggle-btn::after {
   content: '▼';
   font-size: 11px;
@@ -502,11 +513,12 @@
 
 .poll-vote-btn {
   border-radius: 999px;
-  border: 1px solid #dde1ff;
-  background: #f7f8ff;
+  border: 1px solid var(--border-color);
+  background: var(--button-bg);
   padding: 5px 10px;
   font-size: 12px;
   cursor: pointer;
+  color: var(--text-primary);
 }
 
 .poll-vote-btn.voted {
@@ -675,7 +687,7 @@
   <div class="sub-toggle" onclick="toggleContent('comp')">
     <span>📈 복리란 무엇인가?</span><span class="chevron">▼</span>
   </div>
-  <div class="content" id="comp">
+  <div class="sub-content" id="comp">
     <p>
       복리는 <strong>'이자 위에 또 이자가 붙는 구조'</strong>입니다.<br>
       시간 + 꾸준함 = 눈덩이처럼 커지는 힘 !
@@ -724,7 +736,7 @@
     <div class="sub-toggle" onclick="toggleContent('c8')">
       <span>📊 대표 S&P500 ETF</span><span class="chevron">▼</span>
     </div>
-    <div class="content" id="c8">
+    <div class="sub-content" id="c8">
       <p style="font-size:13px; font-weight:600; margin-top:0; margin-bottom:8px; color:var(--text-primary);">
         🇺🇸 미국 상장 ETF (달러 투자)
       </p>
@@ -1099,7 +1111,7 @@
 
 <div class="box">
   <button id="poll-toggle-btn" class="poll-toggle-btn">
-    🗳️ 어떤 내용을 더 알고 싶나요?
+     🗳️ 어떤 내용을 더 알고 싶나요?
   </button>
 
   <div id="poll-container" style="display:none; margin-top:10px;">
@@ -1182,7 +1194,7 @@
 <!-- S&P500 히트맵 -->
 <div class="box">
   <button id="heatmap-toggle-btn" class="poll-toggle-btn">
-    📊 S&P500 히트맵 보기
+     📊 S&P500 히트맵 보기
   </button>
   
   <div id="heatmap-container" style="display:none; margin-top:10px; font-size:14px; color:var(--text-primary); line-height:1.6;">
@@ -1217,7 +1229,7 @@
 <!-- 만든이가 좋아하는 투자 콘텐츠 -->
 <div class="box">
   <button id="content-toggle-btn" class="poll-toggle-btn">
-    만든이가 좋아하는 투자 콘텐츠 🙃
+     🙃 만든이가 좋아하는 투자 콘텐츠
   </button>
 
   <div id="content-container" style="display:none; margin-top:10px;">
