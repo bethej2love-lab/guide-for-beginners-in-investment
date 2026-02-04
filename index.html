@@ -466,12 +466,34 @@
   font-weight: 600;
   cursor: pointer;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 0.2s ease;
+}
+
+.poll-toggle-btn:hover {
+  background: #e8ebff;
+  border-color: #c5ccff;
+  transform: translateY(-1px);
+}
+
+.poll-toggle-btn::after {
+  content: '▼';
+  font-size: 11px;
+  color: var(--text-secondary);
+  transition: transform 0.2s ease;
 }
 
 .poll-toggle-btn.open {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+}
+
+.poll-toggle-btn.open::after {
+  content: '▲';
+  color: #fff;
 }
 
 .poll-option {
@@ -557,6 +579,7 @@
 }
 
 .chart-wrapper {
+  display: none;
   margin-top: 20px;
   position: relative;
   height: 400px;
@@ -976,7 +999,11 @@
 
   <!-- 랜덤 투자 정보 -->
   <button class="full" onclick="showRandomETF()">🎲 랜덤 투자 정보 보기</button>
-  <div id="randomInfo" class="info-box" style="margin-top:8px;"></div>
+  <div id="randomInfo" class="info-box" style="margin-top:8px;">
+    <p style="text-align:center; color:var(--text-secondary); margin:0;">
+      👆 정보 보기 버튼을 눌러보세요!
+    </p>
+  </div>
 </div>
 
 
@@ -1057,6 +1084,7 @@
         <span class="result-label">공격적 시나리오 (12% 수익률)</span>
         <span class="result-value highlight" id="result12"></span>
       </div>
+    </div>
 
     <div class="chart-wrapper">
       <canvas id="freedomChart"></canvas>
@@ -1881,6 +1909,9 @@
         }
       }
     });
+    
+    // 차트 영역 표시
+    document.querySelector('.chart-wrapper').style.display = 'block';
   }
 </script>
 </body>
