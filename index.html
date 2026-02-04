@@ -637,7 +637,35 @@ body.dark-mode .poll-toggle-btn:hover {
   color: var(--accent);
   font-size: 16px;
 }
-  }
+/* =========================
+   Focus accessibility (no UI change)
+   ========================= */
+
+/* 키보드(Tab)로 이동할 때만 포커스 링 표시 */
+:where(button, [role="button"], a, input, select, textarea):focus {
+  outline: none;
+}
+
+:where(button, [role="button"], a, input, select, textarea):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* 둥근 버튼들은 링도 둥글게 */
+.icon-btn:focus-visible,
+button.full:focus-visible,
+.poll-toggle-btn:focus-visible,
+.poll-vote-btn:focus-visible,
+#poll-reset-btn:focus-visible,
+.amount-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* 다크모드에서 링이 너무 튀면 살짝 부드럽게 */
+body.dark-mode :where(button, [role="button"], a, input, select, textarea):focus-visible {
+  outline-offset: 3px;
+}
 </style>
 </head>
 <body>
@@ -654,7 +682,7 @@ body.dark-mode .poll-toggle-btn:hover {
       <div class="share-option" data-type="kakao">
         <span>💬</span> 카카오톡
       </div>
-      <div class="share-option" data-type="copy">
+      <div class="share-option" tabindex="0" role="button" data-type="copy">
         <span>🔗</span> 링크 복사
       </div>
     </div>
@@ -669,7 +697,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- 왜 1000원부터? -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c2')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c2')">
       <span>💡 왜 1,000원부터 시작하라고 할까?</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c2">
@@ -684,7 +712,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
 <!-- 복리 개념 -->
 <div class="section">
-  <div class="sub-toggle" onclick="toggleContent('comp')">
+  <div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('comp')">
     <span>📈 복리란 무엇인가?</span><span class="chevron">▼</span>
   </div>
   <div class="sub-content" id="comp">
@@ -703,7 +731,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- ETF란? -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c1')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c1')">
       <span>🧺 ETF란 무엇인가?</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c1">
@@ -718,7 +746,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- S&P500 특징 -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c3')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c3')">
       <span>📈 S&P500 ETF의 핵심 특징</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c3">
@@ -733,7 +761,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- ETF 비교 -->
   <div class="section">
-    <div class="sub-toggle" onclick="toggleContent('c8')">
+    <div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('c8')">
       <span>📊 대표 S&P500 ETF</span><span class="chevron">▼</span>
     </div>
     <div class="sub-content" id="c8">
@@ -779,7 +807,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
 <!-- 배당 설명 -->
 <div class="section">
-  <div class="toggle" onclick="toggleContent('dividend1')">
+  <div class="toggle" tabindex="0" role="button" onclick="toggleContent('dividend1')">
     <span>💰 배당이란 무엇인가?</span><span class="chevron">▼</span>
   </div>
   <div class="content" id="dividend1">
@@ -799,7 +827,7 @@ body.dark-mode .poll-toggle-btn:hover {
 </div>
 
 <!-- 하위: S&P500 ETF 배당 정보 -->
-<div class="sub-toggle" onclick="toggleContent('dividend2')">
+<div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('dividend2')">
   <span>📎 S&P500 ETF의 배당 수익률</span><span class="chevron">▼</span>
 </div>
 <div class="sub-content" id="dividend2">
@@ -817,7 +845,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- 토스증권 주식 모으기 -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c4')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c4')">
       <span>📱 토스증권에서 '주식 모으기'로 시작하기</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c4">
@@ -833,7 +861,7 @@ body.dark-mode .poll-toggle-btn:hover {
   </div>
 
 <!-- ⬇ 하위 섹션: 데이마켓 -->
-<div class="sub-toggle" onclick="toggleContent('sub_day')">
+<div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('sub_day')">
   <span>💵 정규장에서 직접 매수·매도하기</span><span class="chevron">▼</span>
 </div>
 <div class="sub-content" id="sub_day">
@@ -850,7 +878,7 @@ body.dark-mode .poll-toggle-btn:hover {
 </div>
 
 <!-- ⬇ 하위 섹션: 시장 시간 -->
-<div class="sub-toggle" onclick="toggleContent('sub_time')">
+<div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('sub_time')">
   <span>⏰ 미국 주식 시장 시간 (한국 기준)</span><span class="chevron">▼</span>
 </div>
 <div class="sub-content" id="sub_time">
@@ -864,7 +892,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
 <!-- 상위: 환율 설명 -->
 <div class="section">
-  <div class="toggle" onclick="toggleContent('fx1')">
+  <div class="toggle" tabindex="0" role="button" onclick="toggleContent('fx1')">
     <span>💱 환율이 왜 중요한가?</span><span class="chevron">▼</span>
   </div>
   <div class="content" id="fx1">
@@ -878,7 +906,7 @@ body.dark-mode .poll-toggle-btn:hover {
 </div>
 
 <!-- 하위 1: 환전 방법 -->
-<div class="sub-toggle" onclick="toggleContent('fx_sub1')">
+<div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('fx_sub1')">
   <span>🏦 토스증권에서 환전하는 법</span><span class="chevron">▼</span>
 </div>
 <div class="sub-content" id="fx_sub1">
@@ -889,7 +917,7 @@ body.dark-mode .poll-toggle-btn:hover {
 </div>
 
 <!-- 하위 2: 우대 시간 -->
-<div class="sub-toggle" onclick="toggleContent('fx_sub2')">
+<div class="sub-toggle" tabindex="0" role="button" onclick="toggleContent('fx_sub2')">
   <span>⏰ 환전 수수료 우대 시간</span><span class="chevron">▼</span>
 </div>
 <div class="sub-content" id="fx_sub2">
@@ -900,7 +928,7 @@ body.dark-mode .poll-toggle-btn:hover {
 </div>
 
 <div class="section">
-  <div class="toggle" onclick="toggleContent('tax1')">
+  <div class="toggle" tabindex="0" role="button" onclick="toggleContent('tax1')">
     <span>🧾 미국 주식 세금 간단 정리</span><span class="chevron">▼</span>
   </div>
   <div class="content" id="tax1">
@@ -934,7 +962,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- M7 vs S&P500 -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c9')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c9')">
       <span>➕ M7과 S&P500 ETF</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c9">
@@ -968,7 +996,7 @@ body.dark-mode .poll-toggle-btn:hover {
 
   <!-- 주의사항 -->
   <div class="section">
-    <div class="toggle" onclick="toggleContent('c7')">
+    <div class="toggle" tabindex="0" role="button" onclick="toggleContent('c7')">
       <span>⚠️ 주의사항</span><span class="chevron">▼</span>
     </div>
     <div class="content" id="c7">
@@ -992,10 +1020,10 @@ body.dark-mode .poll-toggle-btn:hover {
   이 계산기는 '매 거래일마다 일정 금액'을 투자한다고 가정합니다!
 </p>
     <div class="amount-buttons">
-      <div class="amount-btn" onclick="selectAmount(1000)">일 1,000원</div>
-      <div class="amount-btn" onclick="selectAmount(3000)">일 3,000원</div>
-      <div class="amount-btn" onclick="selectAmount(5000)">일 5,000원</div>
-      <div class="amount-btn" onclick="selectAmount(10000)">일 10,000원</div>
+      <div class="amount-btn" tabindex="0" role="button" onclick="selectAmount(1000)">일 1,000원</div>
+      <div class="amount-btn" tabindex="0" role="button" onclick="selectAmount(3000)">일 3,000원</div>
+      <div class="amount-btn" tabindex="0" role="button" onclick="selectAmount(5000)">일 5,000원</div>
+      <div class="amount-btn" tabindex="0" role="button" onclick="selectAmount(10000)">일 10,000원</div>
     </div>
     <button class="full" onclick="runSimulation(10)">10년 뒤 금액 계산하기</button>
     <button class="full" onclick="runSimulation(30)">30년 뒤 금액 계산하기</button>
@@ -1380,7 +1408,33 @@ body.dark-mode .poll-toggle-btn:hover {
       c.style.display = "block";
       if (chev) chev.textContent = "▲";
     }
-  }
+}
+// =========================
+// Keyboard: Enter/Space로 토글 열기 (UI/내용 변화 없음)
+// =========================
+(function enableToggleKeyboard() {
+  const toggleSelectors = ['.toggle', '.sub-toggle'];
+
+  const toggles = document.querySelectorAll(toggleSelectors.join(','));
+  toggles.forEach((el) => {
+    // Tab으로 포커스 가능하게 (보이는 변화 없음)
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+    if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+
+    el.addEventListener('keydown', (e) => {
+      // Enter or Space
+      const isEnter = (e.key === 'Enter');
+      const isSpace = (e.key === ' ' || e.key === 'Spacebar'); // 구형 브라우저 대비
+
+      if (isEnter || isSpace) {
+        // Space 누르면 페이지 스크롤되는 것 방지
+        e.preventDefault();
+        // 기존 onclick 로직을 그대로 재사용 (UI/UX 동일)
+        el.click();
+      }
+    });
+  });
+})();
 
   // 랜덤 투자 정보
   const etfFacts = [
@@ -1393,7 +1447,13 @@ body.dark-mode .poll-toggle-btn:hover {
     "복리의 마법 - 10%씩 30년 투자하면 원금이 17배가 됩니다. 일찍 시작할수록 유리합니다.",
     "잃지 않는 것이 먼저 - 50% 손실을 회복하려면 100% 수익이 필요합니다.",
     "시장 타이밍은 불가능 - 최고점과 최저점을 맞추려 하지 말고 꾸준히 투자하세요.",
-    "장기 투자에서 가장 중요한 건 '계속 시장에 남아있는 것'입니다."
+    "장기 투자에서 가장 중요한 건 '계속 시장에 남아있는 것'입니다.",
+    "'복잡한 전략보다 꾸준한 원칙이 강하다' – 존 보글 (인덱스 투자 창시자, 뱅가드 설립자)",
+    "'시장은 단기적으로는 투표기계지만, 장기적으로는 저울이다' – 벤저민 그레이엄 (가치투자의 아버지, 워런 버핏의 스승)",
+    "'리스크는 내가 무엇을 하고 있는지 모를 때 생긴다' – 워런 버핏 (세계에서 가장 유명한 장기 투자자)",
+    "구성이 거의 같은 ETF라도 연 보수에 차이가 날 수 있습니다. 장기 투자일수록 보수 차이가 누적되니 유의하세요!",
+    "ETF 배당(분배금)은 자동으로 다시 투자되지 않습니다. 원하면 직접 다시 매수해야 합니다."
+
   ];
 
   function showRandomETF() {
