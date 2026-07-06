@@ -2,7 +2,7 @@
 
 처음 투자를 시작하는 분들을 위한 S&P500 ETF 입문 가이드입니다.
 
-**[→ 바로 사용하기](https://bethej2love-lab.github.io/narang-mandart-chart/mandart.html](https://bethej2love-lab.github.io/guide-for-beginners-in-investment/)**
+**[→ 바로 사용하기](https://bethej2love-lab.github.io/guide-for-beginners-in-investment/)**
 
 ## 주요 기능
 
