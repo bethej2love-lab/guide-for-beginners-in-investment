@@ -2,7 +2,7 @@
 
 처음 투자를 시작하는 분들을 위한 S&P500 ETF 입문 가이드입니다.
 
-**[→ 바로 사용하기](/)**
+**[→ 바로 사용하기](https://bethej2love-lab.github.io/guide-for-beginners-in-investment/)**
 
 <img width="631" height="861" alt="image" src="https://github.com/user-attachments/assets/185dbef7-bb36-409c-812d-1559d6042c81" />
 
