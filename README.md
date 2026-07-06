@@ -4,6 +4,8 @@
 
 **[→ 바로 사용하기](https://bethej2love-lab.github.io/guide-for-beginners-in-investment/)**
 
+<img width="631" height="861" alt="image" src="https://github.com/user-attachments/assets/185dbef7-bb36-409c-812d-1559d6042c81" />
+
 ## 주요 기능
 
 - ETF 기초 개념 설명 (ETF란, 복리, 배당, 환율, 세금 등)
