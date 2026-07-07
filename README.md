@@ -2,9 +2,13 @@
 
 처음 투자를 시작하는 분들을 위한 S&P500 ETF 입문 가이드입니다.
 
+*A beginner-friendly interactive guide to S&P500 ETF investing (Korean language, with live simulators and charts).*
+
 **[→ 바로 사용하기](https://bethej2love-lab.github.io/guide-for-beginners-in-investment/)**
 
 <img width="631" height="861" alt="image" src="https://github.com/user-attachments/assets/185dbef7-bb36-409c-812d-1559d6042c81" />
+
+⚠️ 투자에 대한 모든 책임은 본인에게 있습니다. 본 가이드는 정보 제공 목적이며 투자 권유가 아닙니다.
 
 ## 주요 기능
 
@@ -26,4 +30,4 @@ Vanilla HTML/CSS/JS · Chart.js · CountAPI · GitHub Pages
 
 <img width="565" height="817" alt="image" src="https://github.com/user-attachments/assets/0eaa3e13-2ae1-4005-a5fc-47e8ea76584e" />
 
-홍진채, 『거인의 어깨』 — S&P500 수익률 차트 출처
+홍진채, 『거인의 어깨』, 포레스트북스, 2022 — S&P500 수익률 차트 출처
